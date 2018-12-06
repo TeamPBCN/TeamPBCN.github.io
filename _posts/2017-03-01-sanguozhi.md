@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "《三国志》汉化版"
 tags: ["released"]
 ---

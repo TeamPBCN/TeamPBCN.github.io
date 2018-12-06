@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "《微型小说系列Vol - 02 - 境域的一月》汉化版"
 tags: ["released"]
 ---
@@ -25,4 +26,4 @@ tags: ["released"]
 ![screenshot3](/images/{{ page.url }}/screenshot_03.png)
 
 ### 【下载地址】
-[暂无可用链接]
+[[百度云]](https://pan.baidu.com/s/1kWVvObH) 密码：sg07

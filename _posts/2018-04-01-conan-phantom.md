@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "《名侦探柯南：幻影狂诗曲》汉化版"
 tags: ["released"]
 ---

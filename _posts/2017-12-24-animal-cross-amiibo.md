@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "《一起来吧！动物之森 amiibo+》汉化版"
 tags: ["released"]
 ---

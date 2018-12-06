@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "《微型小说系列Vol - 03 - 赠与的二月》汉化版"
 tags: ["released"]
 ---

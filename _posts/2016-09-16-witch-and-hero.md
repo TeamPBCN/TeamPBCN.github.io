@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "《魔女与勇者Ⅱ》汉化版"
 tags: ["released"]
 ---

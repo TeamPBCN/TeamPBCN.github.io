@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "《名侦探柯南：木偶交响曲》汉化版"
 tags: ["released"]
 ---

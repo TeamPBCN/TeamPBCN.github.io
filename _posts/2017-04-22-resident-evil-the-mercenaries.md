@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "《生化危机：雇佣兵3D》汉化版"
 tags: ["released"]
 ---

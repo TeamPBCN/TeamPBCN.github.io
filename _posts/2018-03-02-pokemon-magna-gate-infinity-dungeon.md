@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "《精灵宝可梦不可思议的迷宫：玛格纳之门与∞（无限）迷宫》汉化版"
 tags: ["released"]
 ---

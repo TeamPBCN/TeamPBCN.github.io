@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "《冒险岛：命运的少女》汉化版"
 tags: ["released"]
 ---
