@@ -91,6 +91,4 @@ Wexos's Toolbox：Nintendo 3DS/Wii U/Switch 可视化布局编辑工具。
 
 
 ### 【下载链接】
-[[点我下载]]({{ site.url }}/downloads{{ page.url }}/{{ "[TeamPB]Made_in_Wario_Gorgeous_CHS_Ver_1.0.cia" | cgi_escape }})
-
 [[百度云]](https://pan.baidu.com/s/1dM2lyxYKtpGrcK8THmDjxQ) 提取码:qnr0

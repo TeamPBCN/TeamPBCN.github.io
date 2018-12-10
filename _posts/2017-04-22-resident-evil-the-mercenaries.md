@@ -36,5 +36,3 @@ tags: ["released"]
 
 ### 【下载地址】
 [[百度云]](https://pan.baidu.com/s/1o8hVkT0)
-
-[[补丁备用地址]]({{ site.url }}/downloads{{ page.url }}/{{ "CTR-P-ABME_CHS_Ver_1.0.exe" | cgi_escape }})

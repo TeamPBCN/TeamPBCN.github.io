@@ -38,5 +38,3 @@ tags: ["released"]
 
 ### 【下载地址】
 [[百度云]](https://pan.baidu.com/s/1bo4QfMZ)
-
-[[补丁备份]]({{ site.url }}/downloads{{ page.url }}/{{ "[TeamPB]CTR-N-KWHJ_v1.02.exe" | cgi_escape }})

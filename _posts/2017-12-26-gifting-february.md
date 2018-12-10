@@ -37,9 +37,6 @@ tags: ["released"]
 [[百度云]](https://pan.baidu.com/s/1c2GZgTa)
 密码: 2nhr 
 
-[[CIA]]({{ site.url }}/downloads{{ page.url }}/{{ "[TeamPB]Gifting_February_CHS_Ver_1.0.cia" | cgi_escape }})
-[[3DS]]({{ site.url }}/downloads{{ page.url }}/{{ "[TeamPB]Gifting_February_CHS_Ver_1.0.3ds" | cgi_escape }})
-
 ### 【温馨提示】
 * 游戏剧情顺序：
 * ①《收获的十二月》

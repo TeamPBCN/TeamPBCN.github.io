@@ -1,7 +1,0 @@
-PB汉化组《初音未来：未来计划DX》汉化补丁使用说明
-
-1. GW用户：
-   下载美版3ds格式游戏，使用本目录下的"[TeamPB]Miku_Project_DX_CHS_v1.0.exe"补丁工具对ROM打补丁即可。
-
-2. Luma3DS自制系统用户：
-   安装美版CIA，将本目录下的"[TeamPB]Miku_Project_DX_CHS_v1.0_for_luma.zip"压缩包中的luma文件夹解压到你的SD卡根目录下，即可实现汉化。
