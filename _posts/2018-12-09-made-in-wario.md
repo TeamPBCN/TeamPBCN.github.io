@@ -91,4 +91,12 @@ Wexos's Toolbox：Nintendo 3DS/Wii U/Switch 可视化布局编辑工具。
 
 
 ### 【下载链接】
+**使用说明**
+游戏本体可以使用任意地区版本，安装汉化补丁后，运行游戏即可实现汉化。
+
+[[点我下载]](https://github.com/TeamPBCN/Made-in-Wario/releases/download/Ver.1.1C/TeamPB.Made_in_Wario_Gorgeous_CHS_Ver_1.1C.cia)
+
 [[百度云]](https://pan.baidu.com/s/1dM2lyxYKtpGrcK8THmDjxQ) 提取码:qnr0
+
+**补丁校验**
+CRC32：D79DDD09
