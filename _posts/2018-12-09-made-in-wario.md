@@ -89,14 +89,29 @@ Wexos's Toolbox：Nintendo 3DS/Wii U/Switch 可视化布局编辑工具。
 
 工具主页：http://wiki.tockdom.com/wiki/Wexos%27s_Toolbox
 
+<h3 style="color:red" id="下载链接">
+【下载链接】
+</h3>
 
-### 【下载链接】
 **使用说明**
+
+
 游戏本体可以使用任意地区版本，安装汉化补丁后，运行游戏即可实现汉化。
 
+<p style="color:skyblue">关于固件欺骗补丁的说明</p>
+
+固件欺骗补丁在内容上与普通版没有任何差异，但最低支持的3DS系统版本修改为 9.0.0 。
+本游戏原生支持最低版本为 11.4.0 ，固件欺骗补丁未在低版本下完整测试，不能保证完美运行。
+如果可能，请将你的虚拟系统升级到最新，以保证游戏可以正常运行。
+
 [[点我下载]](https://github.com/TeamPBCN/Made-in-Wario/releases/download/Ver.1.1C/TeamPB.Made_in_Wario_Gorgeous_CHS_Ver_1.1C.cia)
+
+[[固件欺骗版补丁]](https://github.com/TeamPBCN/Made-in-Wario/releases/download/Ver.1.1C/TeamPB.Made_in_Wario_Gorgeous_CHS_Ver_1.0_FirmSpoof.cia)
 
 [[百度云]](https://pan.baidu.com/s/1dM2lyxYKtpGrcK8THmDjxQ) 提取码:qnr0
 
 **补丁校验**
-CRC32：D79DDD09
+
+普通补丁 CRC32：D79DDD09
+
+固件欺骗补丁 CRC32：7066BE45
