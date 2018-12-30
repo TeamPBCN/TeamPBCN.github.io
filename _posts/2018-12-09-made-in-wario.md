@@ -100,9 +100,11 @@ Wexos's Toolbox：Nintendo 3DS/Wii U/Switch 可视化布局编辑工具。
 
 <p style="color:skyblue">关于固件欺骗补丁的说明</p>
 
-固件欺骗补丁在内容上与普通版没有任何差异，但最低支持的3DS系统版本修改为 9.0.0 。
+固件欺骗补丁在内容上与普通版<strong>没有任何差异</strong>，但最低支持的3DS系统版本修改为 9.0.0 。
 本游戏原生支持最低版本为 11.4.0 ，固件欺骗补丁未在低版本下完整测试，不能保证完美运行。
 如果可能，请将你的虚拟系统升级到最新，以保证游戏可以正常运行。
+
+<strong>如果你的系统版本 >= 11.4.0，可以选择任意一个补丁安装</strong>
 
 [[点我下载]](https://github.com/TeamPBCN/Made-in-Wario/releases/download/Ver.1.1C/TeamPB.Made_in_Wario_Gorgeous_CHS_Ver_1.1C.cia)
 
