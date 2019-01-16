@@ -215,10 +215,13 @@ tags: ["released"]
 ##### 译名+座右铭+口头禅初翻名单：（统计单位为村民人数）
 
 * 日翻：达君Σ(ﾟ∀ﾟﾉ)ﾉｷ（176）、kirara（121）、蟑螂君（66）、孔子（54）、L×H Ron（36）
+
 * 英翻：Yui（262）、吃葡萄不吐葡萄皮（30）、咕咕先生（27）、ellenshanshan（13）
+
 * 韩翻：小醉醉（189）、堕天喵（102）
 
   说明书翻译：（统计以对应章节数）
+
 * L×H Ron（1-8）、孔子（8-10）、蟑螂君（11-18）、买不起NS的苦逼薇（19-23）
 
   校对：螳螂虾
@@ -243,8 +246,6 @@ ba-GUI-nnertool作者：FONZD
 
 首发帝、Led、shuliiin、Ruby_zzZ、阿刃、穿裤衩的猫猫、粉猫、pursuer、小朋友、明、傻全、小凯、邹小蝉、伊贺18代忍者
 
-
-
 ### 【下载地址】
 
 内含名词表单：道具日美中对照表  （便于根据日美攻略查找自己需要道具，KK点歌的中文搜索对照）
@@ -255,10 +256,8 @@ ba-GUI-nnertool作者：FONZD
 
 20180122更新版本
 
-链接: https://pan.baidu.com/s/1nvYzk17 密码: nuy9
+[百度云](https://pan.baidu.com/s/1nvYzk17)  密码: nuy9
 
 中文LOGO ROM下载（此ROM版本为桌面下显示标题为中文版本，如果日文logo版用户想替换，请备份好自己的存档再安装！！！）
 
-链接: https://pan.baidu.com/s/1pMtZMDd 密码: 7nmi
-
-
+[百度云](https://pan.baidu.com/s/1pMtZMDd)  密码: 7nmi
