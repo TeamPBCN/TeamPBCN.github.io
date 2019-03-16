@@ -40,5 +40,11 @@ tags: ["released"]
 ![banner](/images/{{ page.url }}/screenshot_03.bmp)
 ![banner](/images/{{ page.url }}/screenshot_04.bmp)
 
+### 【v1.1 修改说明】
+* 修复 补丁生成的 CIA 无法正常游戏的问题。
+
 ### 【下载链接】
-[【百度云】](https://pan.baidu.com/s/18Z0xAgcJzmKYGY7Ar9KM3A) 提取码: dp8y 
+
+[[汉化补丁工具 v1.1]](https://github.com/TeamPBCN/Metroid-Samus-Returns/releases/download/v1.1/TeamPB.Metroid_Samus_returns_CHS_Patch_v1.1.zip)
+
+[[百度云]](https://pan.baidu.com/s/18Z0xAgcJzmKYGY7Ar9KM3A) 提取码: dp8y 
