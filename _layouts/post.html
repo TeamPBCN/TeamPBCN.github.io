@@ -9,6 +9,11 @@ route: post
     {{ site.data.tag_names[tag].name }}
     {% endfor %}
 </div>
+{% if page.author %}
+<div class="author">作者：
+    {{page.author}}
+</div>
+{% endif %}
 
 {{ content }}
 
