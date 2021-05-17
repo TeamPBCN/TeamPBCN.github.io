@@ -7,9 +7,9 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", geneva, verdana, sans-serif;
-  font-size: 14px;
-  line-height: 130%;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: medium;
+  line-height: 180%;
   color: #777;
 }
 
@@ -57,6 +57,7 @@ a:hover {
 img {
   max-width: 100%;
   max-height: 100%;
+  border-radius: 5px;
 }
 
 #return-to-top {

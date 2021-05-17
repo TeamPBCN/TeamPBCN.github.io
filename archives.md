@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "archives"
+title: 文章列表
 ---
 
-# 归档
+# 文章列表
 
 {% for post in site.posts %}
     {% assign year = post.date | date: '%Y' %}
