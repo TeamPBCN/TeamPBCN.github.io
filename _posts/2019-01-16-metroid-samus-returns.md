@@ -35,10 +35,10 @@ tags: ["released"]
 测试：JonirRings，螳螂虾，拉普达，墨白
 
 ### 【汉化预览】
-![banner](/images/{{ page.url }}/screenshot_01.bmp)
-![banner](/images/{{ page.url }}/screenshot_02.bmp)
-![banner](/images/{{ page.url }}/screenshot_03.bmp)
-![banner](/images/{{ page.url }}/screenshot_04.bmp)
+![screenshot_01](/images/{{ page.url }}/screenshot_01.bmp)
+![screenshot_02](/images/{{ page.url }}/screenshot_02.bmp)
+![screenshot_03](/images/{{ page.url }}/screenshot_03.bmp)
+![screenshot_04](/images/{{ page.url }}/screenshot_04.bmp)
 
 ### 【v1.1 修改说明】
 * 修复 补丁生成的 CIA 无法正常游戏的问题。

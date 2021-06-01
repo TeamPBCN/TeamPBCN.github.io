@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: false
-title:  "《诡计对逻辑：第二季》汉化发布"
+title:  "《诡计对逻辑：第二季》汉化版"
 tags: ["released"]
 author: "PB汉化组"
 ---
