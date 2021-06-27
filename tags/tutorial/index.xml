@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tutorial on PB 汉化组</title>
-    <link>http://pbteam.cn/tags/tutorial/</link>
+    <link>http://www.pbteam.cn/tags/tutorial/</link>
     <description>Recent content in tutorial on PB 汉化组</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 22 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://pbteam.cn/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://www.pbteam.cn/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《诡计对逻辑》汉化研究</title>
-      <link>http://pbteam.cn/posts/txl-hack/</link>
+      <link>http://www.pbteam.cn/posts/txl-hack/</link>
       <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://pbteam.cn/posts/txl-hack/</guid>
+      <guid>http://www.pbteam.cn/posts/txl-hack/</guid>
       <description>前言 去年（2018）年中，有汉化组的成员表示希望汉化这款游戏，托我研究一下技术上是否可行。但由于现实中的事情，加上拖延症，以及有其它汉化坑，迟迟没有开坑这个游戏。经过漫长的拖延，终于在今年年初抽出时间开始研究。 这是我第一次接触PSP游戏的破解，我对这个平台并不了解。不过好在模拟器PPSSPP的调试功能还算完备，对逆向分析游戏十分有帮助。
 初步分析 首先，我们需要将游戏的镜像文件解包。PSP游戏镜像是ISO格式，7zip、WinRAR等软件都能直接解压，在Windows 10上还能挂载到文件系统中直接访问。
 我们来观察一下解包出来的目录结构（部分文件未展示）： PSP游戏遵循程序和数据分别储存的原则：程序二进制代码的路径是PSP_GAME/SYSDIR/EBOOT.BIN，这是一个加密的ELF文件，关于如何让解密这个ELF后面会提及；数据的路径是PSP_GAME/USRDIR/，一般来说需要汉化的文本、图片等内容都在数据目录下，当然，少数情况下，EBOOT.BIN中也可能会有一些文本。 下面着重看一下USRDIR这个目录。在USRDIR/data下有几个子目录，根据它们的命名，可以猜测当中包含的文件的用途，分别是：视频（movie）、共享游戏（sharing）、音频（sound），很明显，我们需要汉化的文本，并不存在于这些目录下。那么，我们可以猜测，文本应该是储存在data目录下的bin文件中的，但是这些bin（二进制）文件到底是什么呢？
@@ -36,10 +36,10 @@
     
     <item>
       <title>第一节 - 游戏汉化的基本流程</title>
-      <link>http://pbteam.cn/posts/3ds-tutorial-01/</link>
+      <link>http://www.pbteam.cn/posts/3ds-tutorial-01/</link>
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://pbteam.cn/posts/3ds-tutorial-01/</guid>
+      <guid>http://www.pbteam.cn/posts/3ds-tutorial-01/</guid>
       <description>游戏汉化，或者其它语言的本土化，可以简单概括为一句话：将游戏中可见的文字元素从源语言修改成目的语言。对于汉化而言，就是将其它语言的文字修改为汉语，并确保在游戏中正常显示。
 要完成这个工作，一般要经历以下步骤：
 游戏分析-&amp;gt;资源导出-&amp;gt;文字、图像处理-&amp;gt;资源导入-&amp;gt;测试-&amp;gt;发布
@@ -60,10 +60,10 @@
     
     <item>
       <title>3DS游戏汉化：从入门到入土 - 序</title>
-      <link>http://pbteam.cn/posts/3ds-tutorial-00/</link>
+      <link>http://www.pbteam.cn/posts/3ds-tutorial-00/</link>
       <pubDate>Sun, 06 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://pbteam.cn/posts/3ds-tutorial-00/</guid>
+      <guid>http://www.pbteam.cn/posts/3ds-tutorial-00/</guid>
       <description>各位关注PB汉化组的朋友们，大家新年好！我是PB汉化组的组长，LITTOMA。
 时光飞逝，转眼间我们就迎来了2019年的新年。 今年是我们汉化组成立的第5年，距离我们发布的第一款汉化作品，也快过去4年了。 我们是一个由热爱游戏的玩家自发组成的团体，成员来自五湖四海，大部分成员之间素未谋面。只是出于热爱，我们相聚在一起，并坚持到了今天。
 五年前，我第一次产生自己动手汉化自己喜欢的游戏的想法，是因为感叹于当时官方中文游戏的匮乏，同时也希望借此结交一些跟我有相同爱好的朋友。 今天，我可以荣幸地说，当初的愿望已经实现了。我拥有了一群十分难得的朋友，在和他们共同努力下，完成了一个又一个游戏的汉化。
