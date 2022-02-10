@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on PB 汉化组</title>
-    <link>http://www.pbteam.cn/posts/</link>
+    <link>https://www.pbteam.cn/posts/</link>
     <description>Recent content in Posts on PB 汉化组</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://www.pbteam.cn/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.pbteam.cn/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《宝可梦绘心教室》汉化版</title>
-      <link>http://www.pbteam.cn/posts/pokemon-art-academy/</link>
+      <link>https://www.pbteam.cn/posts/pokemon-art-academy/</link>
       <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://www.pbteam.cn/posts/pokemon-art-academy/</guid>
+      <guid>https://www.pbteam.cn/posts/pokemon-art-academy/</guid>
       <description>大家好，又到了一年一度的六一儿童节，祝各位大小朋友节日快乐！
 今天给大家带来一款充满乐趣的游戏——《宝可梦绘心教室》的汉化版。 本作包含了多款人气宝可梦的详细绘制教程，通过细致入微的引导，让玩家一步步地画出精美的宝可梦绘画。 与其说是游戏，不如说这是一款充满可玩性的绘画入门教程。
 相信通过这一系列的教程，你也能成为出色的宝可梦插画家！
@@ -27,10 +27,10 @@
     
     <item>
       <title>《诡计对逻辑：第二季》汉化版</title>
-      <link>http://www.pbteam.cn/posts/trickxlogic/</link>
+      <link>https://www.pbteam.cn/posts/trickxlogic/</link>
       <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://www.pbteam.cn/posts/trickxlogic/</guid>
+      <guid>https://www.pbteam.cn/posts/trickxlogic/</guid>
       <description>【游戏介绍】 PSP推理解谜新作《诡计X逻辑》特别邀请到绫辻行人、有栖川有栖、我孙子武丸、竹本健治、麻耶雄嵩、大山诚一郎、黒田研二等在内七名人气推理小说家来负责设计犯案手法陷阱、编剧与故事撰写,谜题阵容可谓有史以来之最。本作讲述了被人从大楼推落而身受重伤的天才检察官芳川树,在重伤临死之际只有肉体残留人间,而意识却来到了冥界。而在冥界正为了制裁罪人而感到头痛的阎魔大王,注意到芳川的清晰头脑而决定任命他工作,那就是解开在现世所发生却未曾被人解开的事件真相,找出犯人的真面目。就这样,阎魔大王将记载未解决事件的冥界藏书《阿迦奢》交给芳川。《阿迦奢》是一本季载着事件解决全部所必须要素的书,唯一没有写入记载的,就是犯人跟犯人所用的陷阱手法而已。而这对天才检察官与阎魔大王的异类组合,是否真能解开书上所记载的各种事件呢!
 【汉化人员】 坑主：墨白 翻译：A型吐槽体 美工：冥月深渊 程序：LITTOMA
 【汉化感言】  墨白  大家好，我是这次游戏汉化的坑主墨白，虽说是坑主，但其实根本没做什么，大部分都在打杂，游戏汉化能够完成主要还是靠三位大佬啦。这次游戏的汉化源于18年夏天和A君偶然聊起这款解密文字游戏和《有罪x无罪》，当时觉得这两款这么好的游戏没有汉化实在太可惜了。抱着希望更多人能玩到好的文字游戏的想法，联系了破解大佬LIT。后来出了第一版游戏因为指针问题不能游玩，我以为这款游戏又要像世界树迷宫一样胎死腹中，后来几经周折，终于解决了程序上的问题，经过大家的努力终于赶在了母亲节完成了这款游戏的汉化，此时的心情有喜悦也有感动，不管怎么说，游戏完成了，没有愧对在等待的每位小伙伴，同时也再次感谢每位组员的付出。
@@ -41,10 +41,10 @@
     
     <item>
       <title>《诡计对逻辑》汉化研究</title>
-      <link>http://www.pbteam.cn/posts/txl-hack/</link>
+      <link>https://www.pbteam.cn/posts/txl-hack/</link>
       <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://www.pbteam.cn/posts/txl-hack/</guid>
+      <guid>https://www.pbteam.cn/posts/txl-hack/</guid>
       <description>前言 去年（2018）年中，有汉化组的成员表示希望汉化这款游戏，托我研究一下技术上是否可行。但由于现实中的事情，加上拖延症，以及有其它汉化坑，迟迟没有开坑这个游戏。经过漫长的拖延，终于在今年年初抽出时间开始研究。 这是我第一次接触PSP游戏的破解，我对这个平台并不了解。不过好在模拟器PPSSPP的调试功能还算完备，对逆向分析游戏十分有帮助。
 初步分析 首先，我们需要将游戏的镜像文件解包。PSP游戏镜像是ISO格式，7zip、WinRAR等软件都能直接解压，在Windows 10上还能挂载到文件系统中直接访问。
 我们来观察一下解包出来的目录结构（部分文件未展示）： PSP游戏遵循程序和数据分别储存的原则：程序二进制代码的路径是PSP_GAME/SYSDIR/EBOOT.BIN，这是一个加密的ELF文件，关于如何让解密这个ELF后面会提及；数据的路径是PSP_GAME/USRDIR/，一般来说需要汉化的文本、图片等内容都在数据目录下，当然，少数情况下，EBOOT.BIN中也可能会有一些文本。 下面着重看一下USRDIR这个目录。在USRDIR/data下有几个子目录，根据它们的命名，可以猜测当中包含的文件的用途，分别是：视频（movie）、共享游戏（sharing）、音频（sound），很明显，我们需要汉化的文本，并不存在于这些目录下。那么，我们可以猜测，文本应该是储存在data目录下的bin文件中的，但是这些bin（二进制）文件到底是什么呢？
@@ -63,11 +63,15 @@
 大致整理一下思路，我们可以着手进行分析的函数分别是SDK中的sceIoOpenAsync、sceIoReadAsync、sceIoLseekAsync，以及 strcmp ，这些函数，模拟器已经标注出来了：
 关于以上几个io函数的原型，我们可以参考 pspsdk 中的文档。
 以下是从 pspsdk 网站中摘抄的函数说明：
- SceUID sceIoOpenAsync( const char * file, int flags, SceMode mode ) Open or create a file for reading or writing (asynchronous)Parametersfile	- Pointer to a string holding the name of the file to openflags	- Libc styled flags that are or&#39;ed togethermode	- File access mode (One or more SceIoMode).</description>
-    </item>
+ SceUID sceIoOpenAsync( const char * file, int flags, SceMode mode ) Open or create a file for reading or writing (asynchronous)
+Parameters
+file	- Pointer to a string holding the name of the file to open
+flags	- Libc styled flags that are or&#39;ed together
+mode	- File access mode (One or more SceIoMode).</description>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《密特罗德：萨姆斯回归》汉化版</title>
+      <titlehttps://www.pbteam.cntle>
       <link>http://www.pbteam.cn/posts/metroid-samus-returns/</link>
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
@@ -81,10 +85,10 @@
 测试：JonirRings，螳螂虾，拉普达，墨白
 【汉化预览】 【v1.1 修改说明】  修复 补丁生成的 CIA 无法正常游戏的问题。  【下载链接】 [汉化补丁工具 v1.1]
 [百度云] 提取码: dp8y</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>第一节 - 游戏汉化的基本流程</title>
+      <titlehttps://www.pbteam.cntle>
       <link>http://www.pbteam.cn/posts/3ds-tutorial-01/</link>
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
@@ -105,10 +109,10 @@
 四、资源导入 这个步骤是资源导出的逆过程。同样地，我们需要根据第一步的分析结果，编写或者使用现有工具，将前面导出的资源重新转换成游戏所支持的格式。
 五、测试 游玩汉化版游戏，找出汉化版游戏中出现的问题并进行修正，直到修复所有存在的问题为止。
 六、发布 完成前面的步骤后，我们的游戏就可以跟玩家见面了。</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>3DS游戏汉化：从入门到入土 - 序</title>
+      <titlehttps://www.pbteam.cn/title>
       <link>http://www.pbteam.cn/posts/3ds-tutorial-00/</link>
       <pubDate>Sun, 06 Jan 2019 00:00:00 +0000</pubDate>
       
@@ -122,10 +126,10 @@
 这个系列会不定期在我们的主页（www.pbteam.cn）上更新，文章列表也会在本文下方更新，所以有兴趣的朋友可以收藏本文链接作为目录。
 正如文章标题所言，“从入门到入土”，游戏汉化绝对不是一件简单轻松的事，所以这个系列的目标是以劝退为主， 希望仍在坑前观望的朋友在看了这个系列文章后，悬崖勒马，及时回头。 如果在那之后，你仍然有强烈的跳坑愿望，那么恭喜你，你已经在坑里了。
 【文章列表】 第一节 - 游戏汉化的基本流程</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《瓦力欧制造：超赞版》汉化版</title>
+      <titlehttps://www.pbteam.cnle>
       <link>http://www.pbteam.cn/posts/made-in-wario/</link>
       <pubDate>Sun, 09 Dec 2018 00:00:00 +0000</pubDate>
       
@@ -146,29 +150,29 @@
  SPICA：帮助理解 3DS 模型文件格式。
 项目地址：https://github.com/gdkchan/SPICA
  Wexos&amp;rsquo;s Toolbox：Nintendo 3DS/Wii U/Switch 可视化布局编辑工具。</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《Miitopia》汉化版</title>
+      <titlehttps://www.pbteam.cne>
       <link>http://www.pbteam.cn/posts/miitopia/</link>
       <pubDate>Fri, 20 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>http://www.pbteam.cn/posts/miitopia/</guid>
       <description>大家好，好久不见！不知不觉又到了发布汉化的日子，这个周末陪伴大家的，是我们精心准备的《Miitopia》汉化版，又名：Mii托邦（意译版）、米托皮亚（音译版）、疯狂任豚城（恶搞版）。希望大家周末愉快！
 【汉化说明】  这是一款非常魔性的游戏，你可以理解为《朋友聚会》的RPG版。 在这里，你可以跟自己现实中的朋友、偶像、名人、二次元老婆/老公（的Mii）一起冒险；在这里，你会发现许多其他RPG里所没有的船新职业和装备；在这里，不需要通过特殊的剧情，你就能感觉到跟你一起冒险的同伴们是有血有肉的，他们有性格，有情绪，有喜恶，这些都会对战斗产生不同的影响。总之，只需体验三分钟，你就会跟我们一样，爱上这款游戏。 这是至今为止我玩过的所有RPG中，少数几个能让我愿意从头开始玩第二次甚至第三次的游戏之一，所以，我希望能向更多人安利这款游戏，不愿看到它因语言问题而被埋没。因此，在CHASE发布后，我又找到了队长，提出了这个大胆的想法，但当时组内还有一些旧坑尚未填完，所以开新坑的计划暂时搁下了。过了一段时间，在一个月黑风高的夜晚，毫无预兆地，队长发给我一份神秘的压缩文件，从此我就开始了漫漫翻（zuo）译（si）之路&amp;hellip;&amp;hellip;到了测试环节时，组内的成员也纷纷参与，上传代表自己形象的Mii，一起在Miitopia的世界里展开冒险，一起对游戏里的事件、人物愉快地吐槽。看到大家玩得不亦乐乎的样子时，我产生了一种名为“安利成功”的巨大满足感，再一次感受到亲身参与自己喜欢的游戏的汉化工作是一件特别有成就感的事。 在此，感谢队长（LITTOMA），没有他的支持就没有这个坑的存在；感谢吉吉、团子、墨白、达君等队友的测试捉虫，帮忙找出了不少翻译问题。我们PB汉化组是一个有爱的集体，希望更多有能力、有奉献精神的小伙伴能成为我们的队友，加入到我们的冒险中来。 小提示：长按下屏可加快跑图及战斗的速度 另外，由于NPC的Mii的特殊性和随机性，Mii的名字无法被汉化，并且问卷调查的部分也没法汉化（随便选就行），敬请谅解。  【汉化人员】  坑主·翻译·润色：A型吐槽体 测试：A型吐槽体，达君，JJ，墨白，团子 技术研究·程序·打杂：N.G.LIT  【汉化截图】 【下载地址】 [百度云] 密码：p7ee</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《初音未来：未来计划DX》汉化版</title>
+      <titlehttps://www.pbteam.cnitle>
       <link>http://www.pbteam.cn/posts/mirai-project-dx/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>http://www.pbteam.cn/posts/mirai-project-dx/</guid>
       <description>【汉化说明】  正在看贴子的大家，儿童节快乐！ 今天为大家带来一款我们组内史前旧坑的游戏汉化——《初音未来：未来计划DX》 首先向一直关注和等待这款汉化的同学说一声抱歉，让你们久等了。 从宣布开坑至今，已经过去了将近三年的时间。 由于各种各样的原因，这个汉化一度中断，汉化进度停滞不前，汉化成员也不断流失，最终导致几乎无限期的延期。 直到今年初，一位强力翻译+美工+催坑成员——吉吉的加入，这个坑得到了重启。 她不可思议地完成了一周内修完全部数千张图片的壮举，使得进度实现了大幅度推进。 另外，还要感谢另外两位翻译—— A型吐槽体 和 Xrodo 的强力支援，完成了所有图片的翻译，使得后续的汉化工作成为可能。  【注意事项】  由于人力所限，本汉化并非100%汉化，我们只针对理解游玩游戏所必须的UI部分和提示性文本进行了翻译， 游戏中的歌词、某些对话仍未翻译，但这些内容不影响游戏的正常进行，敬请谅解。  【汉化人员】  翻译：A型吐槽体，Xrodo 美工：吉吉 破解、程序：LITTOMA  【下载地址】 [百度云] 密码：tu1b</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《名侦探柯南：幻影狂诗曲》汉化版</title>
+      <titlehttps://www.pbteam.cnitle>
       <link>http://www.pbteam.cn/posts/conan-phantom/</link>
       <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
       
@@ -185,10 +189,10 @@
 [CIA补丁]
 [CIA补丁（未加密）]
 AR卡片：</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《精灵宝可梦不可思议的迷宫：玛格纳之门与∞（无限）迷宫》汉化版</title>
+      <titlehttps://www.pbteam.cn与∞（无限）迷宫》汉化版</title>
       <link>http://www.pbteam.cn/posts/pokemon-magna-gate-infinity-dungeon/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       
@@ -200,20 +204,20 @@ AR卡片：</description>
 请将补丁打在美版上！
 请将补丁打在美版上！
 重要的事情说三遍</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《Chase: 未解决事件搜查科~遥远的记忆~》汉化版</title>
+      <titlehttps://www.pbteam.cn的记忆~》汉化版</title>
       <link>http://www.pbteam.cn/posts/chase/</link>
       <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>http://www.pbteam.cn/posts/chase/</guid>
       <description>正在看贴子的各位，新年好！好久不见，今天给大家带来一款小型文字推理游戏的汉化—— 《Chase：未解决事件搜查科—遥远的记忆—》
 【汉化说明】  说到CING公司，或许大部分人会感到陌生。但如果你经历过NDS时代，且是一个AVG迷的话，对《黄昏旅馆：215房间》和《最后之窗：真夜中的约束》应该会有所耳闻甚至玩过。本作可以说是那两作的“精神续作”，主人公不再是海德大叔，却有着非常相似的外貌和性格，让人十分怀念。游戏的内容并不多，难度也不大，但麻雀虽小，五脏俱全，作为推理游戏的逻辑性还是有的。 我第一次接触到NDS那两作时还是个上高中的日语小白，现在大学都已经毕业了。本以为CING公司破产，再也看不到那个胡子拉碴、吊儿郎当的海德大叔时，这一作的出现给了我很大的惊喜和安慰。即便它并不是真正意义上的续作，我还是想把它汉化出来。在此，感谢队长（LITTOMA）在加班、过节之余辛苦破解、导文本，满足了我这个任性的愿望；最后，感谢汉化了《黄昏旅馆：215房间》的YYJoy汉化组和汉化了《最后之窗：真夜中的约束》的兔友汉化组。 多亏了汉化界的前辈，曾经的我才能接触到那些优秀的游戏。 多亏了汉化组的伙伴，现在的我才能汉化完自己喜欢的作品。  【汉化人员】  翻译：A型吐槽体 破解：LITTOMA，enler 围观：吉吉  【汉化预览】 【下载地址】  [百度云] 密码: a4g7  【注意】  本游戏原始ROM来源于互联网，汉化版由PB汉化组制作，转载请注明出处。 请勿擅自拆解、二次修改游戏，或用于商业用途。因商业用途造成的法律责任，本组概不负责。  </description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《微型小说系列Vol - 04 - 恋恋的三月》汉化版</title>
+      <titlehttps://www.pbteam.cn恋的三月》汉化版</title>
       <link>http://www.pbteam.cn/posts/lovely-march/</link>
       <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -223,10 +227,10 @@ AR卡片：</description>
   【游戏画面】 【下载地址】 [百度云] 密码：r6su
 【温馨提示】 游戏剧情顺序：
  ①《收获的十二月》 ②《境域的一月》 ③《赠与的二月》 ④《恋恋的三月》 ⑤《青岚的四月》（读取中，请耐心等待……）  </description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《微型小说系列Vol - 03 - 赠与的二月》汉化版</title>
+      <titlehttps://www.pbteam.cn与的二月》汉化版</title>
       <link>http://www.pbteam.cn/posts/gifting-february/</link>
       <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -234,10 +238,10 @@ AR卡片：</description>
       <description>   游戏原名 贈与の二月      汉化小组 PB汉化组    汉化程度 完全汉化    游戏容量 79.8M    游戏平台 3DS     【汉化STAFF】  翻译： 云猫 修图： 吉吉 润色： 吉吉 破解·程序： LITTOMA 测试： 吉吉  【汉化说明】 二月到了！嗯……是游戏里的二月到了。说到二月自然是情人节，不知道各位玩家有没有收到过来自女生的巧克力呢？反正明年的二月我要自己做个巧克力蛋糕！就算没有送的对象！ 明明是汉化说明被我扯到哪去了……二月很快地和大家见面了，后面的三月四月等我也会尽快进行翻译。感谢有吉吉和老大在，你们的存在是我翻译下去的动力。当然还有各位期待着后续更新的玩家和吃瓜群众！谢谢大家了！ 有问题请留言或者私信。
 【游戏画面】 【下载地址】 [百度云] 密码: 2nhr
 【温馨提示】  游戏剧情顺序： ①《收获的十二月》 ②《境域的一月》 ③《赠与的二月》 ④《恋恋的三月》（读取中，请耐心等待……）  </description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《一起来吧！动物之森 amiibo&#43;》汉化版</title>
+      <titlehttps://www.pbteam.cn43;》汉化版</title>
       <link>http://www.pbteam.cn/posts/animal-cross-amiibo/</link>
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -251,55 +255,55 @@ AR卡片：</description>
 　2016年的12月24日，磕磕绊绊之中，动物之森0.2汉化版发布了。
 　2017年的12月24日，经历了整整一年的迭代，动物之森1.0完整汉化版姗姗来迟。
 　一年半时间，说长不长，说短也短，从早期的&amp;mdash;-一起来吧！动物之森“弃坑”汉化组，到如今的&amp;mdash;-一起来吧！动物之森“完坑”汉化组。虽然有几分玩笑的意味，但是却也有几分心酸诚恳和温暖。作为一个明坑汉化项目，从最开始的被玩家质疑为开坑就弃坑的项目，到一次次的更新版本被大家所接受，如今终于迎来了全部完成的这天，意料之外，情理之中。</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《微型小说系列Vol - 02 - 境域的一月》汉化版</title>
+      <titlehttps://www.pbteam.cn域的一月》汉化版</title>
       <link>http://www.pbteam.cn/posts/boundaries-in-january/</link>
       <pubDate>Mon, 18 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.pbteam.cn/posts/boundaries-in-january/</guid>
       <description>游戏名称 境域の一月      中文名称 境域的一月    游戏类型 电子小说    游戏版权 CIRCLE Ent.    汉化版权 PB汉化组    汉化版本 v1.0    游戏编号 000400000011f000     【汉化说明】  迟来的一月，迟到的太久了。这里要和翘首期盼着《收获的十二月》的后续剧情却一直没能等到的朋友们说一声抱歉。这个坑留着的时间太久了，是时候填平了。这次发布的是一月的剧情，后续的月份还在翻译中。如果您有什么建议或者想法欢迎留言。 最后还是要感谢一下老大（LITTOMA）和吉吉，有你们在，这个汉化才能完整，一起加油吧！（好像忘了谁……）当然，也感谢各位玩家朋友的支持！谢谢你们，十二月的故事还在继续，请拭目以待。  【汉化预览】 【下载地址】 [百度云] 密码：sg07</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《微型小说系列Vol - 01 - 收获的十二月》汉化版</title>
+      <titlehttps://www.pbteam.cn获的十二月》汉化版</title>
       <link>http://www.pbteam.cn/posts/harvest-december/</link>
       <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.pbteam.cn/posts/harvest-december/</guid>
       <description>游戏名称 收穫の十二月      中文名称 收获的十二月    游戏类型 电子小说    游戏发行 CIRCLE Ent.    汉化制作 Team PB    汉化版本 v1.1    发布日期 2015-08-07    更新日期 2017-12-18    游戏编号 0004000000114100     【V1.1 汉化说明】  本游戏的汉化版其实早在2年前已经发布了，这一次发布的版本修正了文本里的一些错误并且完善了字库。现在的版本应该没问题了，希望大家能喜欢。 这次炒冷饭的目的是再宣传一下这个游戏，让没玩过这个游戏的玩家来玩一下，因为——一月就要来了。  【V1.1 汉化STAFF】  校对：云猫 测试：吉吉  【V1.0 汉化说明】  本作是微型电子小说系列的第一卷，由CIRCLE公司发行3DS版本，原著版权归制作方所有，翻译版权归PB汉化组所有，制作汉化版仅为学习交流之用，禁止用于商业用途，否则后果自负！希望大家支持正版！（并不贵）  【V1.</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《生化危机：雇佣兵3D》汉化版</title>
+      <titlehttps://www.pbteam.cntle>
       <link>http://www.pbteam.cn/posts/resident-evil-the-mercenaries/</link>
       <pubDate>Sat, 22 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.pbteam.cn/posts/resident-evil-the-mercenaries/</guid>
       <description>游戏名称 Resident Evil: The Mercenaries 3D      中文名称 生化危机：雇佣兵3D    游戏类型 第三人称射击    游戏发行 CAPCOM    汉化制作 Team PB    汉化版本 v1.0    游戏编号 0004000000035900     【汉化说明】  佣兵模式99% 启示录试玩 体术名称可能不完美，但如果没有网友强烈 反对的话，这应该是最终版了。  【汉化人员】  破解： LITTOMA 翻译&amp;amp;校对： 肌肉老爹 润色： 天路上的积、生化危机吧诸位吧友 测试： 天路上的积、流浪的疾风、凌风、单车（伸手党）  【汉化预览】 【下载地址】 [百度云]</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《三国志》汉化版</title>
+      <titlehttps://www.pbteam.cn
       <link>http://www.pbteam.cn/posts/sanguozhi/</link>
       <pubDate>Wed, 01 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.pbteam.cn/posts/sanguozhi/</guid>
       <description>游戏名称 三国志      中文名称 三国志    游戏类型 战略    游戏发行 株式会社コーエー    汉化制作 暗荣汉化组，PB汉化组    汉化版本 v1.0    游戏编号 00040000000F5100     【汉化说明】  好不容易，终于在今天发布了3ds三国志的第一个汉化版了，其实目前的这个汉化版本在我个人看来是不尽人意的，但是没有办法，实在是抽不出人手和精力去精雕细琢了，干脆顺应喷子们，千呼万唤“喷”出来吧。 从2014年底研究并开坑至今，汉化的时间跨度确实不小，可是这汉化的经历可不是想象的那么轻松顺利。先不说技术问题，就翻译人员，就历经了2波，毕竟这个游戏与那些大作相比，受众小，在翻译人员里更是屈指可数，没有兴趣支撑，则难以持之以恒。于是第一波翻译其实在15年还未过半时就差不多停滞了。 当然此时也得说说技术问题了，这是我接触3ds汉化的第一个游戏，经验为0，由于游戏的主要文本是在脚本文件里，当时的导出文本错误不少，也难于阅读，正好第一波的进度并没有多少，于是我就是开始慢慢研究脚本的解析器，尽量修正错误，方便翻译。期间，也在不停的找翻译，只可惜，很多翻译一听是三国志，瞬间表示没有兴趣。 时间就这样来到了2016年了，技术的问题解决了很多，同时也在不懈的坚持下，终于迎来了几位给力的翻译，特别是蓝猫推荐来的心如海大神，一人独揽了30多个文件的翻译任务，还有保罗和夏翊遇辰，其余的翻译大头也由这2位抗住了。年底的时候，终于初翻完成，此时我开始导入，开始了润色及测试，这也就是为什么我以前的那个进度贴沉寂了那么久才开始了更新。（但谁能料到道高一尺，魔高一丈呢，进度更新，喷子也跟着一起更新） 原本是想着春节时发布，为喜欢三国志的朋友增一乐，可谁能想到测试中发现的翻译错误真的很多，就像进度贴里展示的，人物介绍里竟然连董卓刺杀曹操什么的都来了，都成幻想三国志了，只能继续校对润色了。 以上就是一个大概的历程了，特此感谢汉化里的各位参与人员。那啥，3ds三国志2，请去acg微博请愿吧，小的已知错，一开始决定汉化就是个错误！ 珍爱生命，远离汉化！ 转帖请注明出处，谢谢！  【注意事项】  由于本作的《名君冠军道场》部分剧本是需要通过随时通讯从服务器上下载，目前鉴于技术所限，暂只能通过HBL，执行extdata_dump进行导入实现汉化，不然你下载部分的剧本封面是乱码，具体方法可以参看下载地址里的《导入说明.txt》  【汉化人员】  组长：生锈的锄头 破解：生锈的锄头 翻译：执子he之手，保罗，鹿鸣，夏翊遇辰，小熊，心如海，雪天的泡泡 修图：文叔，丑爹，自由之翼，大神の橡皮，小深渊 校对润色：湮没骑士の镇魂歌，刑天，钢铁之心，生锈的锄头，星夜，fgobed 测试：生锈的锄头，湮没骑士の镇魂歌，看公告勿私聊我，哆啦A梦hcl，峰子 吉祥物：蓝猫  【汉化预览】 【下载地址】 [百度云] 密码: af8r</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《魔女与勇者Ⅱ》汉化版</title>
+      <titlehttps://www.pbteam.cn
       <link>http://www.pbteam.cn/posts/witch-and-hero/</link>
       <pubDate>Fri, 16 Sep 2016 00:00:00 +0000</pubDate>
       
       <guid>http://www.pbteam.cn/posts/witch-and-hero/</guid>
       <description>游戏名称 魔女と勇者Ⅱ      中文名称 魔女与勇者Ⅱ    游戏类型 ACT    游戏发行 CIRCLE Ent.    汉化制作 Team PB    汉化版本 v1.0    游戏编号 0004000000140800     【汉化人员】  策划监督：LIT 翻译：偽薔薇の死ぬ頃に、shadow 修图：丫她丑爹、螳螂虾 文本润色：星夜 破解：LIT  【发布感言】  LIT：没有，改名叫做深夜汉化组吧。 螳螂虾：深夜随意汉化组，P 瑞典语“p? natten”有深夜意思。B 白俄罗斯语“выпадковы”有随意意思 生锈的锄头：能不能让我出来下，好久没有透过气了。 星夜：我承认怪我拖延症。。。。 PS：中秋节，大家都要吃月饼，月饼是甜品，所以发了这样一个甜品级的游戏，虽然不大，但是颇有趣味。 ps2：锄头貌似马上会频繁出现了。。。 PS3：最后祝大家中秋快乐。  【汉化预览】 【下载地址】 [百度云]</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《名侦探柯南：木偶交响曲》汉化版</title>
+      <titlehttps://www.pbteam.cnitle>
       <link>http://www.pbteam.cn/posts/conan-symphony/</link>
       <pubDate>Sat, 30 Apr 2016 00:00:00 +0000</pubDate>
       
@@ -309,19 +313,19 @@ AR卡片：</description>
 【汉化声明】 本游戏由PB U+ 心灵联合汉化。 本汉化游戏仅供汉化研究、翻译学习之用，下载后请于24小时内删除。任何组织或个人不得以本品用于任何形式的商业目的，对此产生的一切后果由使用方自负，本汉化组不对此承担任何责任。
 【汉化说明】 首先祝大家劳动节快乐！ 作为柯南的粉丝来说，看着3DS上面的柯南游戏没有汉化总觉得好遗憾。尤其还是这么优秀的作品。不过，这也成为过去式了，真的很感激汉化组成员们的努力。也希望大家能够喜欢这个作品。 需要特别注意的是，在破解生锈的锄头的努力下，游戏已经集成了DLC。关于这个DLC，属于游戏里的种卡（大家可以通过收集种卡看到游戏本篇内看不到的剧情）。请大家切记，在游戏本篇没有通关之前不要开始种卡幸运草狂想曲的剧情，否则严重剧透。 另外，除了第一张高木和美和子的种卡外，其余种卡请通过AR模式（需要用到AR卡片）里面给柯南喂硬币来获得。 还要声明的一点是，这个游戏并非很严谨，剧情BUG是存在的，我已经修改了几处剧情的BUG，但是部分剧情的BUG还是留下来了，所以请不要过分的钻牛角尖。 最后不得不惭愧的和大家说明一点，本游戏目前有一个已知BUG，第二章灰原剧本的14:50时间段发生的侦探时间里，有个BUG，会强制把剧情跳过一小部分，跳过的是侦探团帮助老奶奶和帮她捡她姐姐遗物的小镜子的部分。这个BUG目前还尚无法修复。好在这个BUG对剧情和游戏流程并不造成影响，大家心里有数就行。请大家原谅，谢谢。
 【汉化人员】  破解：生锈的锄头 翻译：云猫，草蛇, PPPalus, 浅听,左手之誓,riko,— —,柠檬不萌，居里木，木辛, 绿川蕾, zeke,闷骚，百合,闪空裂破 美工：丑爹,大闸蟹, 青蛙不要脸,XLONG小龍，123，落落，qq鸡，呆呆宸,大神の橡皮 校对：云猫 润色：叔叔，fgobed，飘渺笑, 朝露 测试: 湮没骑士の镇魂歌，丑爹，梦星，TonyTony，Benladen，fgobed，飘渺笑，生锈的锄头 特别感谢：轨迹之岚  【汉化预览】 【下载地址】 [暂无可用链接]</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《钢铁陨落：入侵》汉化版</title>
+      <titlehttps://www.pbteam.cn>
       <link>http://www.pbteam.cn/posts/iron-fall/</link>
       <pubDate>Thu, 18 Feb 2016 00:00:00 +0000</pubDate>
       
       <guid>http://www.pbteam.cn/posts/iron-fall/</guid>
       <description>游戏名称 IronFall Invasion      中文名称 钢铁陨落：入侵    游戏类型 三人称射击    游戏发行 VD-DEV    汉化制作 Team PB    汉化版本 v1.0    游戏编号 000400000015b100     【汉化人员】  策划监督：小醉醉、上善若水、星夜 翻译：小醉醉 校对：小醉醉 文本润色：星夜 修图：螳螂虾 丑爹 小藤沢 花蓝色的大西洋 测试：丑爹 FYC 锄头 螳螂虾 星夜 破解：锄头 已经被弄干了的上善若水 技术支援：LITTOMA 还有忘记名字的某某某些人  【汉化说明】  汉化程度百分之99，翻译水平较差，请勿喷。 本游戏基于美版汉化，游戏联机锁区，非美版机请安装config.cia修改联机协议。 汉化组持续招新中，强烈欢迎有能力的破解或者翻译，有意请报名。  【下载地址】 [百度云] 密码：luz7</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《忍之PAZURU》汉化版</title>
+      <titlehttps://www.pbteam.cne>
       <link>http://www.pbteam.cn/posts/pazuru/</link>
       <pubDate>Tue, 21 Apr 2015 00:00:00 +0000</pubDate>
       
@@ -329,10 +333,10 @@ AR卡片：</description>
       <description>游戏名称 忍のPAZURU      中文名称 忍之PAZURU    游戏类型 益智    游戏发行 贾船    汉化制作 Team PB    汉化版本 v1.0    游戏编号 0004000000139900     【汉化说明】 本汉化仅作学习和交流之用，任何个人及组织未经本组同意，不得拆解、二次修改，或用作商业用途。请于下载后24小时内自觉删除，否则由此产生的后果自负，本组不负任何责任。游戏版权归游戏公司所有，如果喜欢该游戏，请支持正版，本游戏已于港台版eShop上架。
 【下载链接】 [3DS]
 [CIA]</description>
-    </item>
+    </item>https://www.pbteam.cn
     
     <item>
-      <title>《冒险岛：命运的少女》汉化版</title>
+      <titlehttps://www.pbteam.cnle>
       <link>http://www.pbteam.cn/posts/maple-story-umeinoshoujo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

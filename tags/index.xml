@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on PB 汉化组</title>
-    <link>http://www.pbteam.cn/tags/</link>
+    <link>https://www.pbteam.cn/tags/</link>
     <description>Recent content in Tags on PB 汉化组</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://www.pbteam.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.pbteam.cn/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>released</title>
-      <link>http://www.pbteam.cn/tags/released/</link>
+      <link>https://www.pbteam.cn/tags/released/</link>
       <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://www.pbteam.cn/tags/released/</guid>
+      <guid>https://www.pbteam.cn/tags/released/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tutorial</title>
-      <link>http://www.pbteam.cn/tags/tutorial/</link>
+      <link>https://www.pbteam.cn/tags/tutorial/</link>
       <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://www.pbteam.cn/tags/tutorial/</guid>
+      <guid>https://www.pbteam.cn/tags/tutorial/</guid>
       <description></description>
     </item>
     
     <item>
       <title>wip</title>
-      <link>http://www.pbteam.cn/tags/wip/</link>
+      <link>https://www.pbteam.cn/tags/wip/</link>
       <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://www.pbteam.cn/tags/wip/</guid>
+      <guid>https://www.pbteam.cn/tags/wip/</guid>
       <description></description>
     </item>
     

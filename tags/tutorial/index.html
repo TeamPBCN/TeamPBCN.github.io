@@ -10,25 +10,25 @@
 <meta name="keywords" content="" />
 <meta name="description" content="">
 <meta name="author" content="PB 汉化组">
-<link rel="canonical" href="http://www.pbteam.cn/tags/tutorial/" />
+<link rel="canonical" href="https://www.pbteam.cn/tags/tutorial/" />
 <link href="/assets/css/stylesheet.min.746a86b58bb2b052b5e4df8216510494f04f81e62c08d626150c26c69ca929da.css" integrity="sha256-dGqGtYuysFK15N&#43;CFlEElPBPgeYsCNYmFQwmxpypKdo=" rel="preload stylesheet"
     as="style">
 
-<link rel="icon" href="http://www.pbteam.cn/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://www.pbteam.cn/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://www.pbteam.cn/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://www.pbteam.cn/apple-touch-icon.png">
-<link rel="mask-icon" href="http://www.pbteam.cn/safari-pinned-tab.svg">
+<link rel="icon" href="https://www.pbteam.cn/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.pbteam.cn/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.pbteam.cn/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://www.pbteam.cn/apple-touch-icon.png">
+<link rel="mask-icon" href="https://www.pbteam.cn/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <meta name="generator" content="Hugo 0.84.1" />
-<link rel="alternate" type="application/rss&#43;xml" href="http://www.pbteam.cn/tags/tutorial/index.xml">
+<link rel="alternate" type="application/rss&#43;xml" href="https://www.pbteam.cn/tags/tutorial/index.xml">
 
 
 <meta property="og:title" content="tutorial" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://www.pbteam.cn/tags/tutorial/" /><meta property="og:site_name" content="PB 汉化组" />
+<meta property="og:url" content="https://www.pbteam.cn/tags/tutorial/" /><meta property="og:site_name" content="PB 汉化组" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="tutorial"/>
@@ -89,7 +89,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://www.pbteam.cn/" accesskey="h" title="PB 汉化组 (Alt + H)">PB 汉化组</a>
+            <a href="https://www.pbteam.cn/" accesskey="h" title="PB 汉化组 (Alt + H)">PB 汉化组</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -117,17 +117,17 @@
         </div>
         <ul id="menu" onscroll="menu_on_scroll()">
             <li>
-                <a href="http://www.pbteam.cn/archives/" title="归档">
+                <a href="https://www.pbteam.cn/archives/" title="归档">
                     <span>归档</span>
                 </a>
             </li>
             <li>
-                <a href="http://www.pbteam.cn/search" title="搜索 (Alt &#43; /)" accesskey=/>
+                <a href="https://www.pbteam.cn/search" title="搜索 (Alt &#43; /)" accesskey=/>
                     <span>搜索</span>
                 </a>
             </li>
             <li>
-                <a href="http://www.pbteam.cn/tags/" title="标签">
+                <a href="https://www.pbteam.cn/tags/" title="标签">
                     <span>标签</span>
                 </a>
             </li></ul>
@@ -138,7 +138,7 @@
 <header class="page-header">
 <div class="breadcrumbs">
 
-    <a href="http://www.pbteam.cn/">主页</a>&nbsp;»&nbsp;<a href="http://www.pbteam.cn/tags/">Tags</a>
+    <a href="https://www.pbteam.cn/">主页</a>&nbsp;»&nbsp;<a href="https://www.pbteam.cn/tags/">Tags</a>
 </div>
 
   <h1>tutorial</h1>
@@ -174,9 +174,13 @@
 大致整理一下思路，我们可以着手进行分析的函数分别是SDK中的sceIoOpenAsync、sceIoReadAsync、sceIoLseekAsync，以及 strcmp ，这些函数，模拟器已经标注出来了：
 关于以上几个io函数的原型，我们可以参考 pspsdk 中的文档。
 以下是从 pspsdk 网站中摘抄的函数说明：
- SceUID sceIoOpenAsync( const char * file, int flags, SceMode mode ) Open or create a file for reading or writing (asynchronous)Parametersfile	- Pointer to a string holding the name of the file to openflags	- Libc styled flags that are or&#39;ed togethermode	- File access mode (One or more SceIoMode)....</p>
+ SceUID sceIoOpenAsync( const char * file, int flags, SceMode mode ) Open or create a file for reading or writing (asynchronous)
+Parameters
+file	- Pointer to a string holding the name of the file to open
+flags	- Libc styled flags that are or&#39;ed together
+mode	- File access mode (One or more SceIoMode)....</p>
   </section>
-  <footer class="entry-footer">
+  <footer class="entry-footer">https://www.pbteam.cn
 
 2019 年 4 月 22 日&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;LITTOMA
 </footer>
@@ -208,11 +212,11 @@
 五、测试 游玩汉化版游戏，找出汉化版游戏中出现的问题并进行修正，直到修复所有存在的问题为止。
 六、发布 完成前面的步骤后，我们的游戏就可以跟玩家见面了。</p>
   </section>
-  <footer class="entry-footer">
+  <footer class="entry-footer">https://www.pbteam.cn
 
 2019 年 1 月 16 日&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;PB 汉化组
 </footer>
-  <a class="entry-link" aria-label="post link to 第一节 - 游戏汉化的基本流程" href="http://www.pbteam.cn/posts/3ds-tutorial-01/"></a>
+  <a class="entry-link" aria-label="pohttps://www.pbteam.cn化的基本流程" href="http://www.pbteam.cn/posts/3ds-tutorial-01/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
@@ -235,11 +239,11 @@
 正如文章标题所言，“从入门到入土”，游戏汉化绝对不是一件简单轻松的事，所以这个系列的目标是以劝退为主， 希望仍在坑前观望的朋友在看了这个系列文章后，悬崖勒马，及时回头。 如果在那之后，你仍然有强烈的跳坑愿望，那么恭喜你，你已经在坑里了。
 【文章列表】 第一节 - 游戏汉化的基本流程</p>
   </section>
-  <footer class="entry-footer">
+  <footer class="entry-footer">https://www.pbteam.cn
 
 2019 年 1 月 6 日&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;PB 汉化组
 </footer>
-  <a class="entry-link" aria-label="post link to 3DS游戏汉化：从入门到入土 - 序" href="http://www.pbteam.cn/posts/3ds-tutorial-00/"></a>
+  <a class="entry-link" aria-lahttps://www.pbteam.cnS游戏汉化：从入门到入土 - 序" href="http://www.pbteam.cn/posts/3ds-tutorial-00/"></a>
 </article>
 
     </main><footer class="footer">
