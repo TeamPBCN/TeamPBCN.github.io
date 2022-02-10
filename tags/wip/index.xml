@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wip on PB 汉化组</title>
+    <link>http://www.pbteam.cn/tags/wip/</link>
+    <description>Recent content in wip on PB 汉化组</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 22 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://www.pbteam.cn/tags/wip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《诡计对逻辑》汉化研究</title>
+      <link>http://www.pbteam.cn/posts/txl-hack/</link>
+      <pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.pbteam.cn/posts/txl-hack/</guid>
+      <description>前言 去年（2018）年中，有汉化组的成员表示希望汉化这款游戏，托我研究一下技术上是否可行。但由于现实中的事情，加上拖延症，以及有其它汉化坑，迟迟没有开坑这个游戏。经过漫长的拖延，终于在今年年初抽出时间开始研究。 这是我第一次接触PSP游戏的破解，我对这个平台并不了解。不过好在模拟器PPSSPP的调试功能还算完备，对逆向分析游戏十分有帮助。
+初步分析 首先，我们需要将游戏的镜像文件解包。PSP游戏镜像是ISO格式，7zip、WinRAR等软件都能直接解压，在Windows 10上还能挂载到文件系统中直接访问。
+我们来观察一下解包出来的目录结构（部分文件未展示）： PSP游戏遵循程序和数据分别储存的原则：程序二进制代码的路径是PSP_GAME/SYSDIR/EBOOT.BIN，这是一个加密的ELF文件，关于如何让解密这个ELF后面会提及；数据的路径是PSP_GAME/USRDIR/，一般来说需要汉化的文本、图片等内容都在数据目录下，当然，少数情况下，EBOOT.BIN中也可能会有一些文本。 下面着重看一下USRDIR这个目录。在USRDIR/data下有几个子目录，根据它们的命名，可以猜测当中包含的文件的用途，分别是：视频（movie）、共享游戏（sharing）、音频（sound），很明显，我们需要汉化的文本，并不存在于这些目录下。那么，我们可以猜测，文本应该是储存在data目录下的bin文件中的，但是这些bin（二进制）文件到底是什么呢？
+为了研究这些bin文件，我们用16进制编辑器打开这些文件进行观察。 可以看到，这些文件最开始的8个字节都是字符串&amp;quot;SECTPACK&amp;quot;，我们可以顾名思义地作出假设，这些文件都是PACK，即文件包。我们继续往下看。 从0x310字节开始，有一系列的文件路径一样的字符串，几乎可以肯定之前的猜测，这些bin文件就是文件包，而这些字符串就是打包到文件包中的文件。
+那么从现在开始，我们把这些bin文件称为SectPack。
+仔细观察可以发现，0x10~0x310之间有0x300字节的意义不明的内容，这到底是什么呢？
+根据以往的经验，对于文件包格式，比较常见的结构是把文件数据偏移、文件数据长度、文件名偏移等信息作为一个列表保存在文件包头部。那么很自然的，这个列表的大小，会随着文件包中包含的文件数量增加而增大。因此，SectPack开头的0x300字节不可能是保存这些信息的列表，因为所有包的文件数量完全一致的情况并不多见。实际上，通过统计各文件包中的文件路径数量也可以验证这个判断。
+并且，我们可以注意到，在每一条文件路径之间还有一些意义不明的字节。
+很显然，依靠简单地找规律的做法，是没办法破解SectPack文件的。
+进一步分析 为了进一步分析，我们利用模拟器进行调试。 首先，勾选调试菜单中的“载入后停止”选项，并打开反汇编窗口： 然后，加载游戏，此时游戏就会停止在程序入口处： PPSSPP会对SDK中的一些函数进行自动标记，这是一个非常方便的功能。
+我们要分析 SectPack 文件，不妨先思考一下，从这些文件包中读取文件，需要经历哪些过程。
+首先，一个最基本的事实：这些 SectPack 都是 ISO 文件系统中的文件。因此必定会调用标准库中的打开文件函数；
+然后，在打开文件后，必然需要读取，读取文件也是标准库中包含的函数之一；
+接着，需要调整文件指针来读取指定位置中的内容，就需要 fseek 之类的函数；
+另外，要打开/读取 SectPack 中的文件，假设包中的文件是通过路径来索引的（从文件头部附近确实也看到了一些文件路径）， 那么就需要进行字符串比较，也就是 strcmp。
+大致整理一下思路，我们可以着手进行分析的函数分别是SDK中的sceIoOpenAsync、sceIoReadAsync、sceIoLseekAsync，以及 strcmp ，这些函数，模拟器已经标注出来了：
+关于以上几个io函数的原型，我们可以参考 pspsdk 中的文档。
+以下是从 pspsdk 网站中摘抄的函数说明：
+ SceUID sceIoOpenAsync( const char * file, int flags, SceMode mode ) Open or create a file for reading or writing (asynchronous)Parametersfile	- Pointer to a string holding the name of the file to openflags	- Libc styled flags that are or&#39;ed togethermode	- File access mode (One or more SceIoMode).</description>
+    </item>
+    
+  </channel>
+</rss>

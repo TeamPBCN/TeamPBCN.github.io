@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>《诡计对逻辑》汉化研究 | PB 汉化组</title>
+
+<meta name="keywords" content="tutorial, wip" />
+<meta name="description" content="前言 去年（2018）年中，有汉化组的成员表示希望汉化这款游戏，托我研究一下技术上是否可行。但由于现实中的事情，加上拖延症，以及有其它汉化坑，迟迟没有开坑这个游戏。经过漫长的拖延，终于在今年年初抽出时间开始研究。 这是我第一次接触PSP游戏的破解，我对这个平台并不了解。不过好在模拟器PPSSPP的调试功能还算完备，对逆向分析游戏十分有帮助。
+初步分析 首先，我们需要将游戏的镜像文件解包。PSP游戏镜像是ISO格式，7zip、WinRAR等软件都能直接解压，在Windows 10上还能挂载到文件系统中直接访问。
+我们来观察一下解包出来的目录结构（部分文件未展示）： PSP游戏遵循程序和数据分别储存的原则：程序二进制代码的路径是PSP_GAME/SYSDIR/EBOOT.BIN，这是一个加密的ELF文件，关于如何让解密这个ELF后面会提及；数据的路径是PSP_GAME/USRDIR/，一般来说需要汉化的文本、图片等内容都在数据目录下，当然，少数情况下，EBOOT.BIN中也可能会有一些文本。 下面着重看一下USRDIR这个目录。在USRDIR/data下有几个子目录，根据它们的命名，可以猜测当中包含的文件的用途，分别是：视频（movie）、共享游戏（sharing）、音频（sound），很明显，我们需要汉化的文本，并不存在于这些目录下。那么，我们可以猜测，文本应该是储存在data目录下的bin文件中的，但是这些bin（二进制）文件到底是什么呢？
+为了研究这些bin文件，我们用16进制编辑器打开这些文件进行观察。 可以看到，这些文件最开始的8个字节都是字符串&quot;SECTPACK&quot;，我们可以顾名思义地作出假设，这些文件都是PACK，即文件包。我们继续往下看。 从0x310字节开始，有一系列的文件路径一样的字符串，几乎可以肯定之前的猜测，这些bin文件就是文件包，而这些字符串就是打包到文件包中的文件。
+那么从现在开始，我们把这些bin文件称为SectPack。
+仔细观察可以发现，0x10~0x310之间有0x300字节的意义不明的内容，这到底是什么呢？
+根据以往的经验，对于文件包格式，比较常见的结构是把文件数据偏移、文件数据长度、文件名偏移等信息作为一个列表保存在文件包头部。那么很自然的，这个列表的大小，会随着文件包中包含的文件数量增加而增大。因此，SectPack开头的0x300字节不可能是保存这些信息的列表，因为所有包的文件数量完全一致的情况并不多见。实际上，通过统计各文件包中的文件路径数量也可以验证这个判断。
+并且，我们可以注意到，在每一条文件路径之间还有一些意义不明的字节。
+很显然，依靠简单地找规律的做法，是没办法破解SectPack文件的。
+进一步分析 为了进一步分析，我们利用模拟器进行调试。 首先，勾选调试菜单中的“载入后停止”选项，并打开反汇编窗口： 然后，加载游戏，此时游戏就会停止在程序入口处： PPSSPP会对SDK中的一些函数进行自动标记，这是一个非常方便的功能。
+我们要分析 SectPack 文件，不妨先思考一下，从这些文件包中读取文件，需要经历哪些过程。
+首先，一个最基本的事实：这些 SectPack 都是 ISO 文件系统中的文件。因此必定会调用标准库中的打开文件函数；
+然后，在打开文件后，必然需要读取，读取文件也是标准库中包含的函数之一；
+接着，需要调整文件指针来读取指定位置中的内容，就需要 fseek 之类的函数；
+另外，要打开/读取 SectPack 中的文件，假设包中的文件是通过路径来索引的（从文件头部附近确实也看到了一些文件路径）， 那么就需要进行字符串比较，也就是 strcmp。
+大致整理一下思路，我们可以着手进行分析的函数分别是SDK中的sceIoOpenAsync、sceIoReadAsync、sceIoLseekAsync，以及 strcmp ，这些函数，模拟器已经标注出来了：
+关于以上几个io函数的原型，我们可以参考 pspsdk 中的文档。
+以下是从 pspsdk 网站中摘抄的函数说明：
+ SceUID sceIoOpenAsync( const char * file, int flags, SceMode mode ) Open or create a file for reading or writing (asynchronous)Parametersfile	- Pointer to a string holding the name of the file to openflags	- Libc styled flags that are or&#39;ed togethermode	- File access mode (One or more SceIoMode).">
+<meta name="author" content="LITTOMA">
+<link rel="canonical" href="http://www.pbteam.cn/posts/txl-hack/" />
+<link href="/assets/css/stylesheet.min.746a86b58bb2b052b5e4df8216510494f04f81e62c08d626150c26c69ca929da.css" integrity="sha256-dGqGtYuysFK15N&#43;CFlEElPBPgeYsCNYmFQwmxpypKdo=" rel="preload stylesheet"
+    as="style">
+
+<link rel="icon" href="http://www.pbteam.cn/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://www.pbteam.cn/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://www.pbteam.cn/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://www.pbteam.cn/apple-touch-icon.png">
+<link rel="mask-icon" href="http://www.pbteam.cn/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.84.1" />
+
+
+<meta property="og:title" content="《诡计对逻辑》汉化研究" />
+<meta property="og:description" content="前言 去年（2018）年中，有汉化组的成员表示希望汉化这款游戏，托我研究一下技术上是否可行。但由于现实中的事情，加上拖延症，以及有其它汉化坑，迟迟没有开坑这个游戏。经过漫长的拖延，终于在今年年初抽出时间开始研究。 这是我第一次接触PSP游戏的破解，我对这个平台并不了解。不过好在模拟器PPSSPP的调试功能还算完备，对逆向分析游戏十分有帮助。
+初步分析 首先，我们需要将游戏的镜像文件解包。PSP游戏镜像是ISO格式，7zip、WinRAR等软件都能直接解压，在Windows 10上还能挂载到文件系统中直接访问。
+我们来观察一下解包出来的目录结构（部分文件未展示）： PSP游戏遵循程序和数据分别储存的原则：程序二进制代码的路径是PSP_GAME/SYSDIR/EBOOT.BIN，这是一个加密的ELF文件，关于如何让解密这个ELF后面会提及；数据的路径是PSP_GAME/USRDIR/，一般来说需要汉化的文本、图片等内容都在数据目录下，当然，少数情况下，EBOOT.BIN中也可能会有一些文本。 下面着重看一下USRDIR这个目录。在USRDIR/data下有几个子目录，根据它们的命名，可以猜测当中包含的文件的用途，分别是：视频（movie）、共享游戏（sharing）、音频（sound），很明显，我们需要汉化的文本，并不存在于这些目录下。那么，我们可以猜测，文本应该是储存在data目录下的bin文件中的，但是这些bin（二进制）文件到底是什么呢？
+为了研究这些bin文件，我们用16进制编辑器打开这些文件进行观察。 可以看到，这些文件最开始的8个字节都是字符串&quot;SECTPACK&quot;，我们可以顾名思义地作出假设，这些文件都是PACK，即文件包。我们继续往下看。 从0x310字节开始，有一系列的文件路径一样的字符串，几乎可以肯定之前的猜测，这些bin文件就是文件包，而这些字符串就是打包到文件包中的文件。
+那么从现在开始，我们把这些bin文件称为SectPack。
+仔细观察可以发现，0x10~0x310之间有0x300字节的意义不明的内容，这到底是什么呢？
+根据以往的经验，对于文件包格式，比较常见的结构是把文件数据偏移、文件数据长度、文件名偏移等信息作为一个列表保存在文件包头部。那么很自然的，这个列表的大小，会随着文件包中包含的文件数量增加而增大。因此，SectPack开头的0x300字节不可能是保存这些信息的列表，因为所有包的文件数量完全一致的情况并不多见。实际上，通过统计各文件包中的文件路径数量也可以验证这个判断。
+并且，我们可以注意到，在每一条文件路径之间还有一些意义不明的字节。
+很显然，依靠简单地找规律的做法，是没办法破解SectPack文件的。
+进一步分析 为了进一步分析，我们利用模拟器进行调试。 首先，勾选调试菜单中的“载入后停止”选项，并打开反汇编窗口： 然后，加载游戏，此时游戏就会停止在程序入口处： PPSSPP会对SDK中的一些函数进行自动标记，这是一个非常方便的功能。
+我们要分析 SectPack 文件，不妨先思考一下，从这些文件包中读取文件，需要经历哪些过程。
+首先，一个最基本的事实：这些 SectPack 都是 ISO 文件系统中的文件。因此必定会调用标准库中的打开文件函数；
+然后，在打开文件后，必然需要读取，读取文件也是标准库中包含的函数之一；
+接着，需要调整文件指针来读取指定位置中的内容，就需要 fseek 之类的函数；
+另外，要打开/读取 SectPack 中的文件，假设包中的文件是通过路径来索引的（从文件头部附近确实也看到了一些文件路径）， 那么就需要进行字符串比较，也就是 strcmp。
+大致整理一下思路，我们可以着手进行分析的函数分别是SDK中的sceIoOpenAsync、sceIoReadAsync、sceIoLseekAsync，以及 strcmp ，这些函数，模拟器已经标注出来了：
+关于以上几个io函数的原型，我们可以参考 pspsdk 中的文档。
+以下是从 pspsdk 网站中摘抄的函数说明：
+ SceUID sceIoOpenAsync( const char * file, int flags, SceMode mode ) Open or create a file for reading or writing (asynchronous)Parametersfile	- Pointer to a string holding the name of the file to openflags	- Libc styled flags that are or&#39;ed togethermode	- File access mode (One or more SceIoMode)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.pbteam.cn/posts/txl-hack/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-04-22T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2019-04-22T00:00:00&#43;00:00" /><meta property="og:site_name" content="PB 汉化组" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="《诡计对逻辑》汉化研究"/>
+<meta name="twitter:description" content="前言 去年（2018）年中，有汉化组的成员表示希望汉化这款游戏，托我研究一下技术上是否可行。但由于现实中的事情，加上拖延症，以及有其它汉化坑，迟迟没有开坑这个游戏。经过漫长的拖延，终于在今年年初抽出时间开始研究。 这是我第一次接触PSP游戏的破解，我对这个平台并不了解。不过好在模拟器PPSSPP的调试功能还算完备，对逆向分析游戏十分有帮助。
+初步分析 首先，我们需要将游戏的镜像文件解包。PSP游戏镜像是ISO格式，7zip、WinRAR等软件都能直接解压，在Windows 10上还能挂载到文件系统中直接访问。
+我们来观察一下解包出来的目录结构（部分文件未展示）： PSP游戏遵循程序和数据分别储存的原则：程序二进制代码的路径是PSP_GAME/SYSDIR/EBOOT.BIN，这是一个加密的ELF文件，关于如何让解密这个ELF后面会提及；数据的路径是PSP_GAME/USRDIR/，一般来说需要汉化的文本、图片等内容都在数据目录下，当然，少数情况下，EBOOT.BIN中也可能会有一些文本。 下面着重看一下USRDIR这个目录。在USRDIR/data下有几个子目录，根据它们的命名，可以猜测当中包含的文件的用途，分别是：视频（movie）、共享游戏（sharing）、音频（sound），很明显，我们需要汉化的文本，并不存在于这些目录下。那么，我们可以猜测，文本应该是储存在data目录下的bin文件中的，但是这些bin（二进制）文件到底是什么呢？
+为了研究这些bin文件，我们用16进制编辑器打开这些文件进行观察。 可以看到，这些文件最开始的8个字节都是字符串&quot;SECTPACK&quot;，我们可以顾名思义地作出假设，这些文件都是PACK，即文件包。我们继续往下看。 从0x310字节开始，有一系列的文件路径一样的字符串，几乎可以肯定之前的猜测，这些bin文件就是文件包，而这些字符串就是打包到文件包中的文件。
+那么从现在开始，我们把这些bin文件称为SectPack。
+仔细观察可以发现，0x10~0x310之间有0x300字节的意义不明的内容，这到底是什么呢？
+根据以往的经验，对于文件包格式，比较常见的结构是把文件数据偏移、文件数据长度、文件名偏移等信息作为一个列表保存在文件包头部。那么很自然的，这个列表的大小，会随着文件包中包含的文件数量增加而增大。因此，SectPack开头的0x300字节不可能是保存这些信息的列表，因为所有包的文件数量完全一致的情况并不多见。实际上，通过统计各文件包中的文件路径数量也可以验证这个判断。
+并且，我们可以注意到，在每一条文件路径之间还有一些意义不明的字节。
+很显然，依靠简单地找规律的做法，是没办法破解SectPack文件的。
+进一步分析 为了进一步分析，我们利用模拟器进行调试。 首先，勾选调试菜单中的“载入后停止”选项，并打开反汇编窗口： 然后，加载游戏，此时游戏就会停止在程序入口处： PPSSPP会对SDK中的一些函数进行自动标记，这是一个非常方便的功能。
+我们要分析 SectPack 文件，不妨先思考一下，从这些文件包中读取文件，需要经历哪些过程。
+首先，一个最基本的事实：这些 SectPack 都是 ISO 文件系统中的文件。因此必定会调用标准库中的打开文件函数；
+然后，在打开文件后，必然需要读取，读取文件也是标准库中包含的函数之一；
+接着，需要调整文件指针来读取指定位置中的内容，就需要 fseek 之类的函数；
+另外，要打开/读取 SectPack 中的文件，假设包中的文件是通过路径来索引的（从文件头部附近确实也看到了一些文件路径）， 那么就需要进行字符串比较，也就是 strcmp。
+大致整理一下思路，我们可以着手进行分析的函数分别是SDK中的sceIoOpenAsync、sceIoReadAsync、sceIoLseekAsync，以及 strcmp ，这些函数，模拟器已经标注出来了：
+关于以上几个io函数的原型，我们可以参考 pspsdk 中的文档。
+以下是从 pspsdk 网站中摘抄的函数说明：
+ SceUID sceIoOpenAsync( const char * file, int flags, SceMode mode ) Open or create a file for reading or writing (asynchronous)Parametersfile	- Pointer to a string holding the name of the file to openflags	- Libc styled flags that are or&#39;ed togethermode	- File access mode (One or more SceIoMode)."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://www.pbteam.cn/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "《诡计对逻辑》汉化研究",
+      "item": "http://www.pbteam.cn/posts/txl-hack/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "《诡计对逻辑》汉化研究",
+  "name": "《诡计对逻辑》汉化研究",
+  "description": "前言 去年（2018）年中，有汉化组的成员表示希望汉化这款游戏，托我研究一下技术上是否可行。但由于现实中的事情，加上拖延症，以及有其它汉化坑，迟迟没有开坑这个游戏。经过漫长的拖延，终于在今年年初抽出时间开始研究。 这是我第一次接触PSP游戏的破解，我对这个平台并不了解。不过好在模拟器PPSSPP的调试功能还算完备，对逆向分析游戏十分有帮助。\n初步分析 首先，我们需要将游戏的镜像文件解包。PSP游戏镜像是ISO格式，7zip、WinRAR等软件都能直接解压，在Windows 10上还能挂载到文件系统中直接访问。\n我们来观察一下解包出来的目录结构（部分文件未展示）： PSP游戏遵循程序和数据分别储存的原则：程序二进制代码的路径是PSP_GAME/SYSDIR/EBOOT.BIN，这是一个加密的ELF文件，关于如何让解密这个ELF后面会提及；数据的路径是PSP_GAME/USRDIR/，一般来说需要汉化的文本、图片等内容都在数据目录下，当然，少数情况下，EBOOT.BIN中也可能会有一些文本。 下面着重看一下USRDIR这个目录。在USRDIR/data下有几个子目录，根据它们的命名，可以猜测当中包含的文件的用途，分别是：视频（movie）、共享游戏（sharing）、音频（sound），很明显，我们需要汉化的文本，并不存在于这些目录下。那么，我们可以猜测，文本应该是储存在data目录下的bin文件中的，但是这些bin（二进制）文件到底是什么呢？\n为了研究这些bin文件，我们用16进制编辑器打开这些文件进行观察。 可以看到，这些文件最开始的8个字节都是字符串\u0026quot;SECTPACK\u0026quot;，我们可以顾名思义地作出假设，这些文件都是PACK，即文件包。我们继续往下看。 从0x310字节开始，有一系列的文件路径一样的字符串，几乎可以肯定之前的猜测，这些bin文件就是文件包，而这些字符串就是打包到文件包中的文件。\n那么从现在开始，我们把这些bin文件称为SectPack。\n仔细观察可以发现，0x10~0x310之间有0x300字节的意义不明的内容，这到底是什么呢？\n根据以往的经验，对于文件包格式，比较常见的结构是把文件数据偏移、文件数据长度、文件名偏移等信息作为一个列表保存在文件包头部。那么很自然的，这个列表的大小，会随着文件包中包含的文件数量增加而增大。因此，SectPack开头的0x300字节不可能是保存这些信息的列表，因为所有包的文件数量完全一致的情况并不多见。实际上，通过统计各文件包中的文件路径数量也可以验证这个判断。\n并且，我们可以注意到，在每一条文件路径之间还有一些意义不明的字节。\n很显然，依靠简单地找规律的做法，是没办法破解SectPack文件的。\n进一步分析 为了进一步分析，我们利用模拟器进行调试。 首先，勾选调试菜单中的“载入后停止”选项，并打开反汇编窗口： 然后，加载游戏，此时游戏就会停止在程序入口处： PPSSPP会对SDK中的一些函数进行自动标记，这是一个非常方便的功能。\n我们要分析 SectPack 文件，不妨先思考一下，从这些文件包中读取文件，需要经历哪些过程。\n首先，一个最基本的事实：这些 SectPack 都是 ISO 文件系统中的文件。因此必定会调用标准库中的打开文件函数；\n然后，在打开文件后，必然需要读取，读取文件也是标准库中包含的函数之一；\n接着，需要调整文件指针来读取指定位置中的内容，就需要 fseek 之类的函数；\n另外，要打开/读取 SectPack 中的文件，假设包中的文件是通过路径来索引的（从文件头部附近确实也看到了一些文件路径）， 那么就需要进行字符串比较，也就是 strcmp。\n大致整理一下思路，我们可以着手进行分析的函数分别是SDK中的sceIoOpenAsync、sceIoReadAsync、sceIoLseekAsync，以及 strcmp ，这些函数，模拟器已经标注出来了：\n关于以上几个io函数的原型，我们可以参考 pspsdk 中的文档。\n以下是从 pspsdk 网站中摘抄的函数说明：\n SceUID sceIoOpenAsync( const char * file, int flags, SceMode mode ) Open or create a file for reading or writing (asynchronous)\rParameters\rfile\t- Pointer to a string holding the name of the file to open\rflags\t- Libc styled flags that are or'ed together\rmode\t- File access mode (One or more SceIoMode).",
+  "keywords": [
+    "tutorial", "wip"
+  ],
+  "articleBody": "前言 去年（2018）年中，有汉化组的成员表示希望汉化这款游戏，托我研究一下技术上是否可行。但由于现实中的事情，加上拖延症，以及有其它汉化坑，迟迟没有开坑这个游戏。经过漫长的拖延，终于在今年年初抽出时间开始研究。 这是我第一次接触PSP游戏的破解，我对这个平台并不了解。不过好在模拟器PPSSPP的调试功能还算完备，对逆向分析游戏十分有帮助。\n初步分析 首先，我们需要将游戏的镜像文件解包。PSP游戏镜像是ISO格式，7zip、WinRAR等软件都能直接解压，在Windows 10上还能挂载到文件系统中直接访问。\n我们来观察一下解包出来的目录结构（部分文件未展示）： PSP游戏遵循程序和数据分别储存的原则：程序二进制代码的路径是PSP_GAME/SYSDIR/EBOOT.BIN，这是一个加密的ELF文件，关于如何让解密这个ELF后面会提及；数据的路径是PSP_GAME/USRDIR/，一般来说需要汉化的文本、图片等内容都在数据目录下，当然，少数情况下，EBOOT.BIN中也可能会有一些文本。 下面着重看一下USRDIR这个目录。在USRDIR/data下有几个子目录，根据它们的命名，可以猜测当中包含的文件的用途，分别是：视频（movie）、共享游戏（sharing）、音频（sound），很明显，我们需要汉化的文本，并不存在于这些目录下。那么，我们可以猜测，文本应该是储存在data目录下的bin文件中的，但是这些bin（二进制）文件到底是什么呢？\n为了研究这些bin文件，我们用16进制编辑器打开这些文件进行观察。 可以看到，这些文件最开始的8个字节都是字符串\"SECTPACK\"，我们可以顾名思义地作出假设，这些文件都是PACK，即文件包。我们继续往下看。 从0x310字节开始，有一系列的文件路径一样的字符串，几乎可以肯定之前的猜测，这些bin文件就是文件包，而这些字符串就是打包到文件包中的文件。\n那么从现在开始，我们把这些bin文件称为SectPack。\n仔细观察可以发现，0x10~0x310之间有0x300字节的意义不明的内容，这到底是什么呢？\n根据以往的经验，对于文件包格式，比较常见的结构是把文件数据偏移、文件数据长度、文件名偏移等信息作为一个列表保存在文件包头部。那么很自然的，这个列表的大小，会随着文件包中包含的文件数量增加而增大。因此，SectPack开头的0x300字节不可能是保存这些信息的列表，因为所有包的文件数量完全一致的情况并不多见。实际上，通过统计各文件包中的文件路径数量也可以验证这个判断。\n并且，我们可以注意到，在每一条文件路径之间还有一些意义不明的字节。\n很显然，依靠简单地找规律的做法，是没办法破解SectPack文件的。\n进一步分析 为了进一步分析，我们利用模拟器进行调试。 首先，勾选调试菜单中的“载入后停止”选项，并打开反汇编窗口： 然后，加载游戏，此时游戏就会停止在程序入口处： PPSSPP会对SDK中的一些函数进行自动标记，这是一个非常方便的功能。\n我们要分析 SectPack 文件，不妨先思考一下，从这些文件包中读取文件，需要经历哪些过程。\n首先，一个最基本的事实：这些 SectPack 都是 ISO 文件系统中的文件。因此必定会调用标准库中的打开文件函数；\n然后，在打开文件后，必然需要读取，读取文件也是标准库中包含的函数之一；\n接着，需要调整文件指针来读取指定位置中的内容，就需要 fseek 之类的函数；\n另外，要打开/读取 SectPack 中的文件，假设包中的文件是通过路径来索引的（从文件头部附近确实也看到了一些文件路径）， 那么就需要进行字符串比较，也就是 strcmp。\n大致整理一下思路，我们可以着手进行分析的函数分别是SDK中的sceIoOpenAsync、sceIoReadAsync、sceIoLseekAsync，以及 strcmp ，这些函数，模拟器已经标注出来了：\n关于以上几个io函数的原型，我们可以参考 pspsdk 中的文档。\n以下是从 pspsdk 网站中摘抄的函数说明：\n SceUID sceIoOpenAsync( const char * file, int flags, SceMode mode ) Open or create a file for reading or writing (asynchronous)\rParameters\rfile\t- Pointer to a string holding the name of the file to open\rflags\t- Libc styled flags that are or'ed together\rmode\t- File access mode (One or more SceIoMode).\rReturns\rA non-negative integer is a valid fd, anything else an error\r int sceIoReadAsync(\tSceUID fd, void * data, SceSize size ) Read input (asynchronous)\rExample:\rbytes_read = sceIoRead(fd, data, 100);\rParameters\rfd\t- Opened file descriptor to read from\rdata\t- Pointer to the buffer where the read data will be placed\rsize\t- Size of the read in bytes\rReturns\r int sceIoLseekAsync\t(\tSceUID fd, SceOff offset, int whence ) Reposition read/write file descriptor offset (asynchronous)\rParameters\rfd\t- Opened file descriptor with which to seek\roffset\t- Relative offset from the start position given by whence\rwhence\t- One of SceIoSeekMode.\rReturns\r首先简单说明一下，PSP采用的MIPS架构处理器，参数的传递使用的是 $a0 ~ $a3 寄存器， 分别对应的是 C/C++ 中函数声明的第1 ~ 第4个参数，当参数数目大于4个时， 多出的参数会使用栈进行传递。而函数的返回值使用 $v0 传递，函数返回地址保存在 $ra 寄存器中。\n下面先对 sceIoOpenAsync 断点，继续运行，当断点触发时，跳转到 $a0 寄存器指向的内存地址， 可以看到， $a0 指向的就是将要打开的文件路径：\n这里打开的文件 common.bin 恰好是一个 SectPack 文件。 跳出（Step Out） sceIoOpenAsync ，可以看到 $v0 寄存器的值，即 sceIoOpenAsync 的返回值是 0x00000004 。 根据文档中的说明，这个返回值是一个文件指针，而无论是 Seek、Read、Write、Close等IO操作，都需要传入这个指针。 继续运行，这次断点停在了 sceIoReadAsync 处，可以看到，这里传入的文件指针（$a0）正是前面打开的 SectPack 的文件指针（0x00000004）。\n跳转到 $a1 指向的内存视图，这个参数是读取的内数据存放的地址。 跳出 sceIoReadAsync ，可以看到 common.bin 的前 0x10 字节已经被读到内存中。\n↑内存中的视图\n↓common.bin 文件视图\n 继续运行，断点再次停在了 sceIoReadAsync ，用同样的方法查看内存，可以看到这次读取的是 SectPack 中 0x10 开始的一段数据：\n到了这一步就可以使用另一个调试工具——内存断点，来分析这些数据的作用了。 点击调试窗口中的 Breakpoint 按钮即可打开断点设置：\n内存断点的设置如下，我们对这 0x300 字节的数据进行监视：\n内存断点设置完毕，继续运行至断点被触发，观察一下断点附近的程序：\n把 0x088C075C ~ 0x088C0774 这几句汇编代码翻译成 C 语言（伪代码）就是：\nchar * s = a1 + (v0[1] \u0026 0xFF) | ((v0[2] \u0026 0xFF)  8) + 0x300; strcpy(a0, s); 也就是从 SectPack 头部中读取一个小端的16位整型数，这个值指向了一个字符串。执行完 strcpy 函数后我们可以看到读取此处指向的字符串就是一个储存在SectPack头部的文件路径：\n现在可以判断这 0x300 字节的作用，就是一个指向文件路径的偏移值的表。至于为什么这个表的长度是固定的？有一种可能性，就是所有的文件路径经过某种哈希算法进行了分组，哈希的结果在 0 ~ 0xFF 之间（表的大小是 0x300 字节，表中每一项大小 3 字节，因此最多 0x100 项），这个表保存的就是每个分组的第一个路径的偏移值。这也就能解释为什么表中有些值是 0 ，因为路径的哈希结果没有分布在这些项中。\n未完待续……\n",
+  "wordCount" : "345",
+  "inLanguage": "zh",
+  "datePublished": "2019-04-22T00:00:00Z",
+  "dateModified": "2019-04-22T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "LITTOMA"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://www.pbteam.cn/posts/txl-hack/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "PB 汉化组",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://www.pbteam.cn/favicon.ico"
+    }
+  }
+}
+</script>
+
+
+
+
+
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+    </style>
+
+</noscript>
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://www.pbteam.cn/" accesskey="h" title="PB 汉化组 (Alt + H)">PB 汉化组</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                
+                
+            </span>
+        </div>
+        <ul id="menu" onscroll="menu_on_scroll()">
+            <li>
+                <a href="http://www.pbteam.cn/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.pbteam.cn/search" title="搜索 (Alt &#43; /)" accesskey=/>
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.pbteam.cn/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li></ul>
+    </nav>
+</header>
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+<div class="breadcrumbs">
+
+    <a href="http://www.pbteam.cn/">主页</a>&nbsp;»&nbsp;<a href="http://www.pbteam.cn/posts/">Posts</a>
+</div>
+
+    <h1 class="post-title">
+      《诡计对逻辑》汉化研究
+    </h1>
+    <div class="post-meta">
+
+2019 年 4 月 22 日&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;LITTOMA
+
+
+</div>
+  </header> 
+
+  <div class="post-content">
+<h3 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h3>
+<p>去年（2018）年中，有汉化组的成员表示希望汉化这款游戏，托我研究一下技术上是否可行。但由于现实中的事情，加上拖延症，以及有其它汉化坑，迟迟没有开坑这个游戏。经过漫长的拖延，终于在今年年初抽出时间开始研究。
+这是我第一次接触PSP游戏的破解，我对这个平台并不了解。不过好在模拟器PPSSPP的调试功能还算完备，对逆向分析游戏十分有帮助。</p>
+<h3 id="初步分析">初步分析<a hidden class="anchor" aria-hidden="true" href="#初步分析">#</a></h3>
+<p>首先，我们需要将游戏的镜像文件解包。PSP游戏镜像是ISO格式，7zip、WinRAR等软件都能直接解压，在Windows 10上还能挂载到文件系统中直接访问。</p>
+<p>我们来观察一下解包出来的目录结构（部分文件未展示）：
+<img loading="lazy" src="/images/txl-hack/tree.png#center" alt="banner"  />
+</p>
+<p>PSP游戏遵循程序和数据分别储存的原则：程序二进制代码的路径是<code>PSP_GAME/SYSDIR/EBOOT.BIN</code>，这是一个加密的ELF文件，关于如何让解密这个ELF后面会提及；数据的路径是<code>PSP_GAME/USRDIR/</code>，一般来说需要汉化的文本、图片等内容都在数据目录下，当然，少数情况下，<code>EBOOT.BIN</code>中也可能会有一些文本。
+下面着重看一下<code>USRDIR</code>这个目录。在<code>USRDIR/data</code>下有几个子目录，根据它们的命名，可以猜测当中包含的文件的用途，分别是：视频（movie）、共享游戏（sharing）、音频（sound），很明显，我们需要汉化的文本，并不存在于这些目录下。那么，我们可以猜测，文本应该是储存在data目录下的bin文件中的，但是这些bin（二进制）文件到底是什么呢？</p>
+<p>为了研究这些bin文件，我们用16进制编辑器打开这些文件进行观察。
+<img loading="lazy" src="/images/txl-hack/sectpack.png#center" alt="banner"  />
+</p>
+<p>可以看到，这些文件最开始的8个字节都是字符串&quot;SECTPACK&quot;，我们可以顾名思义地作出假设，这些文件都是PACK，即文件包。我们继续往下看。
+<img loading="lazy" src="/images/txl-hack/filepaths.png#center" alt="banner"  />
+</p>
+<p>从0x310字节开始，有一系列的文件路径一样的字符串，几乎可以肯定之前的猜测，这些bin文件就是文件包，而这些字符串就是打包到文件包中的文件。</p>
+<p>那么从现在开始，我们把这些bin文件称为SectPack。</p>
+<p>仔细观察可以发现，0x10~0x310之间有0x300字节的意义不明的内容，这到底是什么呢？</p>
+<p>根据以往的经验，对于文件包格式，比较常见的结构是把文件数据偏移、文件数据长度、文件名偏移等信息作为一个列表保存在文件包头部。那么很自然的，这个列表的大小，会随着文件包中包含的文件数量增加而增大。因此，SectPack开头的0x300字节不可能是保存这些信息的列表，因为所有包的文件数量完全一致的情况并不多见。实际上，通过统计各文件包中的文件路径数量也可以验证这个判断。</p>
+<p>并且，我们可以注意到，在每一条文件路径之间还有一些意义不明的字节。</p>
+<p>很显然，依靠简单地找规律的做法，是没办法破解SectPack文件的。</p>
+<h3 id="进一步分析">进一步分析<a hidden class="anchor" aria-hidden="true" href="#进一步分析">#</a></h3>
+<p>为了进一步分析，我们利用模拟器进行调试。
+首先，勾选调试菜单中的“载入后停止”选项，并打开反汇编窗口：
+<img loading="lazy" src="/images/txl-hack/debugger.png#center" alt="banner"  />
+</p>
+<p>然后，加载游戏，此时游戏就会停止在程序入口处：
+<img loading="lazy" src="/images/txl-hack/entry.png#center" alt="banner"  />
+</p>
+<p>PPSSPP会对SDK中的一些函数进行自动标记，这是一个非常方便的功能。</p>
+<p>我们要分析 SectPack 文件，不妨先思考一下，从这些文件包中读取文件，需要经历哪些过程。</p>
+<p>首先，一个最基本的事实：这些 SectPack 都是 ISO 文件系统中的文件。因此必定会调用标准库中的打开文件函数；</p>
+<p>然后，在打开文件后，必然需要读取，读取文件也是标准库中包含的函数之一；</p>
+<p>接着，需要调整文件指针来读取指定位置中的内容，就需要 fseek 之类的函数；</p>
+<p>另外，要打开/读取 SectPack 中的文件，假设包中的文件是通过路径来索引的（从文件头部附近确实也看到了一些文件路径），
+那么就需要进行字符串比较，也就是 strcmp。</p>
+<p>大致整理一下思路，我们可以着手进行分析的函数分别是SDK中的sceIoOpenAsync、sceIoReadAsync、sceIoLseekAsync，以及 strcmp ，这些函数，模拟器已经标注出来了：</p>
+<p><img loading="lazy" src="/images/txl-hack/iofuncs.png#center" alt="banner"  />
+
+<img loading="lazy" src="/images/txl-hack/strfuncs.png#center" alt="banner"  />
+</p>
+<p>关于以上几个io函数的原型，我们可以参考 <a href="https://pspdev.github.io/pspsdk/">pspsdk</a> 中的文档。</p>
+<p>以下是从 pspsdk 网站中摘抄的函数说明：</p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">SceUID sceIoOpenAsync(  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> 	file,
+                        <span style="color:#66d9ef">int</span> 	        flags,
+                        SceMode     	mode 
+                        )
+</code></pre></div><pre><code>Open or create a file for reading or writing (asynchronous)
+
+Parameters
+file	- Pointer to a string holding the name of the file to open
+flags	- Libc styled flags that are or'ed together
+mode	- File access mode (One or more SceIoMode).
+Returns
+A non-negative integer is a valid fd, anything else an error
+</code></pre><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> sceIoReadAsync(	SceUID  	fd,
+                        <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> 	        data,
+                        SceSize 	size 
+                        )
+</code></pre></div><pre><code>Read input (asynchronous)
+
+Example:
+bytes_read = sceIoRead(fd, data, 100);
+Parameters
+fd	- Opened file descriptor to read from
+data	- Pointer to the buffer where the read data will be placed
+size	- Size of the read in bytes
+Returns
+&lt; 0 on error.
+</code></pre><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> sceIoLseekAsync	(	SceUID 	fd,
+SceOff 	offset,
+<span style="color:#66d9ef">int</span> 	whence 
+)
+</code></pre></div><pre><code>Reposition read/write file descriptor offset (asynchronous)
+
+Parameters
+fd	- Opened file descriptor with which to seek
+offset	- Relative offset from the start position given by whence
+whence	- One of SceIoSeekMode.
+Returns
+&lt; 0 on error. Actual value should be passed returned by the ::sceIoWaitAsync call.
+</code></pre><p>首先简单说明一下，PSP采用的MIPS架构处理器，参数的传递使用的是 $a0 ~ $a3 寄存器，
+分别对应的是 C/C++ 中函数声明的第1 ~ 第4个参数，当参数数目大于4个时，
+多出的参数会使用栈进行传递。而函数的返回值使用 $v0 传递，函数返回地址保存在 $ra 寄存器中。</p>
+<p>下面先对 sceIoOpenAsync 断点，继续运行，当断点触发时，跳转到 $a0 寄存器指向的内存地址，
+可以看到， $a0 指向的就是将要打开的文件路径：</p>
+<p><img loading="lazy" src="/images/txl-hack/openfile.png#center" alt="banner"  />
+</p>
+<p>这里打开的文件 common.bin 恰好是一个 SectPack 文件。
+跳出（Step Out） sceIoOpenAsync ，可以看到 $v0 寄存器的值，即 sceIoOpenAsync 的返回值是 0x00000004 。
+根据文档中的说明，这个返回值是一个文件指针，而无论是 Seek、Read、Write、Close等IO操作，都需要传入这个指针。
+<img loading="lazy" src="/images/txl-hack/after_open.png#center" alt="banner"  />
+</p>
+<p>继续运行，这次断点停在了 sceIoReadAsync 处，可以看到，这里传入的文件指针（$a0）正是前面打开的 SectPack 的文件指针（0x00000004）。</p>
+<p><img loading="lazy" src="/images/txl-hack/read_pack.png#center" alt="banner"  />
+</p>
+<p>跳转到 $a1 指向的内存视图，这个参数是读取的内数据存放的地址。
+跳出 sceIoReadAsync ，可以看到 common.bin 的前 0x10 字节已经被读到内存中。</p>
+<p><img loading="lazy" src="/images/txl-hack/pack_head.png#center" alt="banner"  />
+</p>
+<p>↑内存中的视图</p>
+<p>↓common.bin 文件视图</p>
+<p><img loading="lazy" src="/images/txl-hack/common_bin_header.png#center" alt="banner"  />
+</p>
+<hr>
+<p>继续运行，断点再次停在了 sceIoReadAsync ，用同样的方法查看内存，可以看到这次读取的是 SectPack 中 0x10 开始的一段数据：</p>
+<p><img loading="lazy" src="/images/txl-hack/0x10_0x310.png#center" alt="banner"  />
+</p>
+<p>到了这一步就可以使用另一个调试工具——内存断点，来分析这些数据的作用了。
+点击调试窗口中的 Breakpoint 按钮即可打开断点设置：</p>
+<p><img loading="lazy" src="/images/txl-hack/bp_btn.png#center" alt="banner"  />
+</p>
+<p>内存断点的设置如下，我们对这 0x300 字节的数据进行监视：</p>
+<p><img loading="lazy" src="/images/txl-hack/mem_break.png#center" alt="banner"  />
+</p>
+<p>内存断点设置完毕，继续运行至断点被触发，观察一下断点附近的程序：</p>
+<p><img loading="lazy" src="/images/txl-hack/bp_read_fnpointer.png#center" alt="banner"  />
+</p>
+<p>把 0x088C075C ~ 0x088C0774 这几句汇编代码翻译成 C 语言（伪代码）就是：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> s <span style="color:#f92672">=</span> a1 <span style="color:#f92672">+</span> (v0[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFF</span>) <span style="color:#f92672">|</span> ((v0[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFF</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">8</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x300</span>;
+strcpy(a0, s);
+</code></pre></div><p>也就是从 SectPack 头部中读取一个小端的16位整型数，这个值指向了一个字符串。执行完 strcpy 函数后我们可以看到读取此处指向的字符串就是一个储存在SectPack头部的文件路径：</p>
+<p><img loading="lazy" src="/images/txl-hack/bp_read_fpath.png#center" alt="banner"  />
+</p>
+<p>现在可以判断这 0x300 字节的作用，就是一个指向文件路径的偏移值的表。至于为什么这个表的长度是固定的？有一种可能性，就是所有的文件路径经过某种哈希算法进行了分组，哈希的结果在 0 ~ 0xFF 之间（表的大小是 0x300 字节，表中每一项大小 3 字节，因此最多 0x100 项），这个表保存的就是每个分组的第一个路径的偏移值。这也就能解释为什么表中有些值是 0 ，因为路径的哈希结果没有分布在这些项中。</p>
+<p>未完待续……</p>
+
+</div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://www.pbteam.cn/tags/tutorial/">tutorial</a></li>
+      <li><a href="http://www.pbteam.cn/tags/wip/">wip</a></li>
+    </ul>
+    <nav class="paginav">
+      <a class="prev" href="http://www.pbteam.cn/posts/trickxlogic/">
+        <span class="title">« 前一篇</span>
+        <br>
+        <span>《诡计对逻辑：第二季》汉化版</span>
+      </a>
+      <a class="next" href="http://www.pbteam.cn/posts/metroid-samus-returns/">
+        <span class="title">后一篇 »</span>
+        <br>
+        <span>《密特罗德：萨姆斯回归》汉化版</span>
+      </a>
+    </nav>
+
+
+
+
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 《诡计对逻辑》汉化研究 on weibo"
+        href="http://service.weibo.com/share/share.php?title=%e3%80%8a%e8%af%a1%e8%ae%a1%e5%af%b9%e9%80%bb%e8%be%91%e3%80%8b%e6%b1%89%e5%8c%96%e7%a0%94%e7%a9%b6&amp;url=http%3a%2f%2fwww.pbteam.cn%2fposts%2ftxl-hack%2f&amp;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/>
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 《诡计对逻辑》汉化研究 on qzone"
+        href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=%e3%80%8a%e8%af%a1%e8%ae%a1%e5%af%b9%e9%80%bb%e8%be%91%e3%80%8b%e6%b1%89%e5%8c%96%e7%a0%94%e7%a9%b6&amp;url=http%3a%2f%2fwww.pbteam.cn%2fposts%2ftxl-hack%2f&amp;">
+        <svg t="1624779543664" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2246" width="200" height="200">
+            <path d="M1023.36 392.618667c-1.365333-4.224-5.418667-9.514667-14.250667-11.008-8.832-1.536-313.642667-59.989333-313.642666-59.989334s-4.48-0.938667-8.448-2.986666c-3.925333-2.005333-5.418667-7.125333-5.418667-7.125334S531.072 40.789333 526.890667 32.853333C522.666667 24.874667 516.437333 22.698667 512 22.698667c-4.437333 0-10.709333 2.176-14.890667 10.154666-4.181333 7.936-154.709333 278.656-154.709333 278.656s-1.493333 5.12-5.461333 7.125334c-3.925333 2.005333-8.405333 2.986667-8.405334 2.986666S23.722667 380.074667 14.848 381.568c-8.874667 1.536-12.885333 6.826667-14.208 11.008a20.352 20.352 0 0 0 5.333333 19.157333l228.778667 234.24s3.072 3.413333 5.077333 7.338667c0.682667 4.437333 0.213333 8.96 0.213334 8.96s-50.730667 308.992-52.053334 317.866667 3.2 15.744 6.784 18.346666c3.541333 2.645333 9.941333 4.522667 17.962667 0.554667 8.064-3.968 290.645333-139.136 290.645333-139.136s4.181333-1.877333 8.576-2.602667c4.394667-0.725333 8.576 2.602667 8.576 2.602667s282.581333 135.168 290.645334 139.136c8.021333 4.010667 14.421333 2.090667 17.962666-0.554667a19.754667 19.754667 0 0 0 6.784-18.346666c-0.896-5.973333-39.68-242.218667-39.68-242.218667 37.376-23.04 60.8-44.330667 78.890667-74.538667-110.677333 41.344-256.256 73.258667-401.706667 79.616-39.04 1.749333-102.826667 4.138667-148.181333-0.64-28.928-3.029333-49.92-6.144-53.034667-18.688-2.261333-9.173333 2.304-19.626667 23.253334-35.456a112661.333333 112661.333333 0 0 1 122.069333-91.946666c54.826667-41.301333 151.850667-105.386667 151.850667-116.522667 0-12.16-91.477333-33.322667-172.245334-33.322667-82.986667 0-97.066667 5.632-119.936 7.168-20.821333 1.450667-32.810667 0.213333-34.304-5.888-2.56-10.581333 7.808-16.597333 25.088-24.234666 30.250667-13.397333 79.36-25.344 84.650667-26.709334 8.277333-2.218667 131.498667-34.346667 239.701333-22.826666 56.234667 5.973333 138.410667 28.501333 138.410667 54.442666 0 14.592-73.429333 63.744-137.6 110.805334-49.024 35.968-94.592 66.602667-94.592 72.021333 0 14.592 150.741333 52.949333 285.397333 43.093333l0.128-0.938666c2.048-3.925333 5.077333-7.338667 5.077334-7.338667l228.778666-234.24a20.352 20.352 0 0 0 5.418667-19.157333z" p-id="2247"></path>
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 《诡计对逻辑》汉化研究 on qzone"
+        href="http://connect.qq.com/widget/shareqq/index.html?title=%e3%80%8a%e8%af%a1%e8%ae%a1%e5%af%b9%e9%80%bb%e8%be%91%e3%80%8b%e6%b1%89%e5%8c%96%e7%a0%94%e7%a9%b6&amp;url=http%3a%2f%2fwww.pbteam.cn%2fposts%2ftxl-hack%2f&amp;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"/></svg>
+    </a>
+</div>
+
+
+  </footer>
+</article>
+    </main><footer class="footer">
+    <span>&copy; 2021 <a href="http://www.pbteam.cn/">PB 汉化组</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+
+
+<script defer src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<script>
+    window.onload = function () {
+        if (localStorage.getItem("menu-scroll-position")) {
+            document.getElementById('menu').scrollLeft = localStorage.getItem("menu-scroll-position");
+        }
+    }
+
+    function menu_on_scroll() {
+        localStorage.setItem("menu-scroll-position", document.getElementById('menu').scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-648P98L28Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-648P98L28Y');
+</script>
+</body>
+
+</html>
